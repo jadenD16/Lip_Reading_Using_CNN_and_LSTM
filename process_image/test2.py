@@ -18,7 +18,7 @@ for filename in glob.glob('D:\\Datasets\\s1\\*.mpg'):
         face = pG.findFaceRect(frame)
 
         mouth=pG.findMouthMeanInFaceRect(frame)
-
+    
         print(mouth)
         print(filename)
 
