@@ -55,7 +55,7 @@ def findFaceRect(frame, mode='dlib'):
         # Detect (only 1) face = (x, y, w, h)
         faceRect = faceCascade.detectMultiScale(
             frame, scaleFactor=1.1, minNeighbors=5)
-        # If a face is found
+        # If a face is foundF
         if faceRect != ():
             # If more than 1 face is found
             if len(faceRect) > 1:
