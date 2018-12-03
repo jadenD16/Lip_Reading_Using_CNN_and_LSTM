@@ -5,6 +5,7 @@ from Lip_Reading_Using_CNN_and_LSTM.process_image import  mouthTracker as mt
 import pandas as pd
 
 mouth_cascade = cv2.CascadeClassifier('C:\\Users\\Jaden\\Downloads\\haarcascade_mcs_mouth.xml')
+mouthCsv = 'C:\\Users\\Jaden\\PycharmProjects\\Thesis\\Lip_Reading_Using_CNN_and_LSTM\\process_image\\mouthData.csv'
 pictCount=0
 evenPicker = 1
 
@@ -35,7 +36,14 @@ for filename in glob.glob('D:\\Datasets\\**\\*.mpg'):
                 pictCount += 1
                 cv2.imwrite('D:\\Datasets\\picts\\pict' + str(pictCount) + '.png', frame)
 
+                #get the coordinates/points of interest
                 mouthPoints = mt.getMouthPoints(gray)
+
+                #get  the x and y mean
+                ymax = y+h
+                xmax = x+w
+
+                pd.read_csv(mouthCsv)
 
 
         evenPicker += 1
