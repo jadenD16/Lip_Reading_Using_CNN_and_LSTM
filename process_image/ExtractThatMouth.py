@@ -1,8 +1,8 @@
 import cv2
 import numpy as np
 import  glob
+from Lip_Reading_Using_CNN_and_LSTM.process_image import  mouthTracker as mt
 import pandas as pd
-import process_GRIDcopus as pg
 
 mouth_cascade = cv2.CascadeClassifier('C:\\Users\\Jaden\\Downloads\\haarcascade_mcs_mouth.xml')
 pictCount=0
@@ -24,25 +24,23 @@ for filename in glob.glob('D:\\Datasets\\**\\*.mpg'):
 
         if cap.get(cv2.CAP_PROP_FRAME_COUNT)==frame_counter:
             break
+
         mouth_rects = mouth_cascade.detectMultiScale(frame, 1.7, 11)
+        mouthPoints = []
 
         for (x,y,w,h) in mouth_rects:
             y = int(y - 0.15*h)
 
-            crop = frame[y:y + (h+3), (x-5):x + (w+4)]
-            resized = cv2.resize(crop, (w + 80, h + 50))
-
-            pg.findMouthMeanInFaceRect()
-            pg.findFaceRect()
-
             if (evenPicker%2) != 0:
                 pictCount += 1
-                cv2.imwrite('D:\\Datasets\\picts\\pict' + str(pictCount) + '.png', resized)
-                print(str(x) + "=x y=" + str(y) + " w=" + str(w) + " h=" + str(h))
-                #print(str(h) + str(w))
+                cv2.imwrite('D:\\Datasets\\picts\\pict' + str(pictCount) + '.png', frame)
+
+                mouthPoints = mt.getMouthPoints(gray)
+
 
         evenPicker += 1
        # print('Saving pictures from: '+filename)
+
     cap.release()
 
 #print('Saving pictures done.....')
