@@ -5,7 +5,7 @@ from Lip_Reading_Using_CNN_and_LSTM.process_image import  mouthTracker as mt
 import pandas as pd
 
 mouth_cascade = cv2.CascadeClassifier('C:\\Users\\Jaden\\Downloads\\haarcascade_mcs_mouth.xml')
-mouthCsv = 'C:\\Users\\Jaden\\PycharmProjects\\Thesis\\Lip_Reading_Using_CNN_and_LSTM\\process_image\\mouthData.csv'
+mouthCsv = 'Lip_Reading_Using_CNN_and_LSTM\\process_image\\mouthData.csv'
 pictCount=0
 evenPicker = 1
 
@@ -27,14 +27,13 @@ for filename in glob.glob('D:\\Datasets\\**\\*.mpg'):
             break
 
         mouth_rects = mouth_cascade.detectMultiScale(frame, 1.7, 11)
-        mouthPoints = []
 
         for (x,y,w,h) in mouth_rects:
             y = int(y - 0.15*h)
 
             if (evenPicker%2) != 0:
                 pictCount += 1
-                cv2.imwrite('D:\\Datasets\\picts\\pict' + str(pictCount) + '.png', frame)
+                mask = np.zeros(frame.shape, dtype="uint8")
 
                 #get the coordinates/points of interest
                 mouthPoints = mt.getMouthPoints(gray)
@@ -42,10 +41,11 @@ for filename in glob.glob('D:\\Datasets\\**\\*.mpg'):
                 #get  the x and y mean
                 ymax = y+h
                 xmax = x+w
-
-                pd.read_csv(mouthCsv)
-
-
+                cv2.fillPoly(mask, [mouthPoints], (0, 255, 0))
+                
+                cv2.imwrite('D:\\Datasets\\picts\\pict' + str(pictCount) + '.png', frame)
+                cv2.imwrite('D:\\Datasets\\picts\\mask' + str(pictCount) + '.png', mask)
+                print('saved')
         evenPicker += 1
        # print('Saving pictures from: '+filename)
 

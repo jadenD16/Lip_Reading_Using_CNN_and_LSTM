@@ -16,8 +16,4 @@ def getMouthPoints(frame):
         shape = predictor(frame, rect)
         shape = face_utils.shape_to_np(shape)
 
-        # Draw on our image, all the finded cordinate points (x,y)
-        #for (x, y) in shape[48:60]:
-         #   cv2.circle(image, (x, y), 2, (0, 255, 0), -1)
-
     return shape[48:60]
