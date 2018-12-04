@@ -3,7 +3,7 @@ import dlib
 
 def getMouthPoints(frame):
 
-    p = "Lip_Reading_Using_CNN_and_LSTM\process_image\\shape_predictor_68_face_landmarks.dat"
+    p = "C:\\Users\\javinarfamily\\PycharmProjects\\Thesis\\Lip_Reading_Using_CNN_and_LSTM\\process_image\\shape_predictor_68_face_landmarks.dat"
     detector = dlib.get_frontal_face_detector()
     predictor = dlib.shape_predictor(p)
 
