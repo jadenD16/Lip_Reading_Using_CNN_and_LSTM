@@ -42,7 +42,7 @@ for filename in glob.glob('D:\\Datasets\\**\\*.mpg'):
                 ymax = y+h
                 xmax = x+w
                 cv2.fillPoly(mask, [mouthPoints], (0, 255, 0))
-                
+
                 cv2.imwrite('D:\\Datasets\\picts\\pict' + str(pictCount) + '.png', frame)
                 cv2.imwrite('D:\\Datasets\\picts\\mask' + str(pictCount) + '.png', mask)
                 print('saved')
