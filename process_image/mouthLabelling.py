@@ -3,6 +3,7 @@ import numpy as np
 import  glob
 from Lip_Reading_Using_CNN_and_LSTM.process_image import  mouthTracker as mt
 import pandas as pd
+import csv
 
 mouth_cascade = cv2.CascadeClassifier('Lip_Reading_Using_CNN_and_LSTM\\process_image\\haarcascade_mcs_mouth.xml')
 mouthCsv = 'Lip_Reading_Using_CNN_and_LSTM\\process_image\\mouthData.csv'
@@ -27,25 +28,40 @@ for filename in glob.glob('D:\\Datasets\\**\\*.mpg'):
             break
 
         mouth_rects = mouth_cascade.detectMultiScale(frame, 1.7, 11)
+        mouthPoints = []
 
         for (x,y,w,h) in mouth_rects:
             y = int(y - 0.15*h)
 
             if (evenPicker%2) != 0:
                 pictCount += 1
-                mask = np.zeros(frame.shape, dtype="uint8")
+                # cv2.imwrite('‪F:\\Datasets\\newpicture\pic' + str(pictCount) + '.png', frame)
 
                 #get the coordinates/points of interest
                 mouthPoints = mt.getMouthPoints(gray)
-
                 #get  the x and y mean
                 ymax = y+h
                 xmax = x+w
-                cv2.fillPoly(mask, [mouthPoints], (0, 255, 0))
-                
-                cv2.imwrite('D:\\Datasets\\picts\\pict' + str(pictCount) + '.png', frame)
-                cv2.imwrite('D:\\Datasets\\picts\\mask' + str(pictCount) + '.png', mask)
-                print('saved')
+                xmin = x
+                ymin = y
+                pictname = 'pict' + str(pictCount) + '.png'
+
+                with open('train_labels2.csv', 'r') as csv_file:
+                    csv_reader = csv.reader(csv_file)
+
+                    with open('train_labels2.csv', 'a',newline='') as csvappend_file:
+                        csv_writer = csv.writer(csvappend_file)
+                        csv_writer.writerow([pictname, '180', '144', 'Mouth', xmin, ymin, xmax, ymax])
+
+                         #debugging tool
+                        print(pictname)
+                        print(xmin)
+                        print(ymin)
+                        print(xmax)
+                        print(ymax)
+                        # pd.read_csv(mouthCsv)
+                        print('----------------------------------')
+
         evenPicker += 1
        # print('Saving pictures from: '+filename)
 
