@@ -5,13 +5,12 @@ from Lip_Reading_Using_CNN_and_LSTM.process_image import mouthTracker as mt
 import pandas as pd
 import csv
 
-mouth_cascade = cv2.CascadeClassifier(
-    'C:\\Users\javinarfamily\\PycharmProjects\\Thesis\\Lip_Reading_Using_CNN_and_LSTM\\process_image\\haarcascade_mcs_mouth.xml')
+mouth_cascade = cv2.CascadeClassifier('C:\\Users\javinarfamily\\PycharmProjects\\Thesis\\Lip_Reading_Using_CNN_and_LSTM\\process_image\\haarcascade_mcs_mouth.xml')
 mouthCsv = 'Lip_Reading_Using_CNN_and_LSTM\\process_image\\mouthData.csv'
-pictCount = 0
+pictCount = 16823
 evenPicker = 1
 
-for filename in glob.glob('D:\\Datasets\\**\\*.mpg'):
+for filename in glob.glob('D:\\Datasets\\s5\\*.mpg'):
 
     frame_counter = 0
     cap = cv2.VideoCapture(filename)
@@ -47,28 +46,25 @@ for filename in glob.glob('D:\\Datasets\\**\\*.mpg'):
                 maskname = 'mask' + str(pictCount) + '.png'
                 cv2.fillPoly(mask, [mouthPoints], (0, 255, 0))
 
-                # cv2.imwrite('D:\\Datasets\\picts\\pict' + str(pictCount) + '.png', frame)
-                # cv2.imwrite('D:\\Datasets\\picts\\mask\\mask' + str(pictCount) + '.png', mask)
+                cv2.imwrite('D:\\Datasets\\picts\\pict' + str(pictCount) + '.png', frame)
+                cv2.imwrite('D:\\Datasets\\picts\\mask' + str(pictCount) + '.png', mask)
 
-                # with open('train_labels2.csv', 'r') as csv_file:
-                #     csv_reader = csv.reader(csv_file)
-                #
-                #     with open('train_labels2.csv', 'a', newline='') as csvappend_file:
-                #         csv_writer = csv.writer(csvappend_file)
-                #         csv_writer.writerow([pictname, '180', '144', 'Mouth', x, y, xmax, ymax])
-                #         print('running')
-
-                # line of code to save data from the mask to csvfile.
-                with open('mask_label.csv', 'r') as csv_file:
+                with open('mouthData.csv', 'r') as csv_file:
                     csv_reader = csv.reader(csv_file)
 
-                    with open('mask_label.csv', 'a', newline='') as csvappend_file:
+                    with open('mouthData.csv', 'a', newline='') as csvappend_file:
                         csv_writer = csv.writer(csvappend_file)
-                        csv_writer.writerow([maskname, '180', '144', 'Mouth', mouthPoints[48:67]])
-                        print('running')
+                        csv_writer.writerow([pictname, '180', '144', 'Mouth', x, y, xmax, ymax])
+                        print('Saved')
 
-                print(mouthPoints)
-                print('saved')
+                # line of code to save data from the mask to csvfile.
+                with open('maskData.csv', 'r') as csv_file:
+                    csv_reader = csv.reader(csv_file)
+
+                    with open('maskData.csv', 'a+', newline='') as csvappend_file:
+                        csv_writer = csv.writer(csvappend_file,delimiter = ',')
+                        csv_writer.writerow([maskname, '180', '144', 'Mouth', mouthPoints])
+                        print('Saved')
 
         evenPicker += 1
     # print('Saving pictures from: '+filename)

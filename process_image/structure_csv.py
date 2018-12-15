@@ -50,12 +50,14 @@ def structure(file, w, h, clas, xMins, yMins, xMax, yMax):
     boundbox.append(ymax)
 
     # data for each file
+    folder.text ='mask'
+    path.text = 'C:\\Tensorflow-Models\\models\\research\\object_detection\\annotations\\mask\\' + file
     Depth.text = '3'
     segmented.text = '0'
     difficult.text = '0'
     truncated.text = '0'
     database.text = 'Unknown'
-    truncated.text = 'Unspecified'
+    pose.text = 'Unspecified'
     width.text = w
     height.text = h
     filename.text = file
@@ -66,4 +68,4 @@ def structure(file, w, h, clas, xMins, yMins, xMax, yMax):
     ymax.text = yMax
 
     print(et.tostring(root))
-    tree.write(open(file.replace('.png', '') + '.xml', 'wb'))
+    tree.write(open(file.replace('.png','') + '.xml', 'wb'))

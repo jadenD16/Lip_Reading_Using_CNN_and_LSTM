@@ -7,7 +7,7 @@ import csv
 
 mouth_cascade = cv2.CascadeClassifier('C:\\Users\\javinarfamily\\PycharmProjects\\Thesis\\Lip_Reading_Using_CNN_and_LSTM\\process_image\\haarcascade_mcs_mouth.xml')
 mouthCsv = 'Lip_Reading_Using_CNN_and_LSTM\\process_image\\mouthData.csv'
-pictCount=0
+pictCount = 0
 evenPicker = 1
 
 for filename in glob.glob('D:\\Datasets\\**\\*.mpg'):
@@ -35,26 +35,24 @@ for filename in glob.glob('D:\\Datasets\\**\\*.mpg'):
 
             if (evenPicker%2) != 0:
                 pictCount += 1
-                # cv2.imwrite('‪F:\\Datasets\\newpicture\pic' + str(pictCount) + '.png', frame)
+                cv2.imwrite('D:\\Datasets\\Face\\pict' + str(pictCount) + '.png', frame)
 
                 #get the coordinates/points of interest
                 mouthPoints = mt.getMouthPoints(gray)
                 #get  the x and y mean
                 ymax = y+h
                 xmax = x+w
-                xmin = x
-                ymin = y
                 pictname = 'pict' + str(pictCount) + '.png'
 
                 with open('mouthData.csv', 'r') as csv_file:
                     csv_reader = csv.reader(csv_file)
 
-                    with open('mouthData.csv', 'a',newline='') as csvappend_file:
+                    with open('mouthData.csv', 'a', newline='') as csvappend_file:
                         csv_writer = csv.writer(csvappend_file)
-                        csv_writer.writerow([pictname, '180', '144', 'Mouth', xmin, ymin, xmax, ymax])
+                        csv_writer.writerow([pictname, '180', '144', 'Mouth', x, y, xmax, ymax])
 
-                         #debugging tool
-                        print('saves')
+                        #debugging tool
+                        print('saved')
         evenPicker += 1
        # print('Saving pictures from: '+filename)
 
