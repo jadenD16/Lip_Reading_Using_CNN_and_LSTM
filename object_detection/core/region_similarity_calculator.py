@@ -23,8 +23,8 @@ from abc import abstractmethod
 
 import tensorflow as tf
 
-from object_detection.core import box_list_ops
-from object_detection.core import standard_fields as fields
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import box_list_ops
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import standard_fields as fields
 
 
 class RegionSimilarityCalculator(object):

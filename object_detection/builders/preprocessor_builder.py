@@ -17,8 +17,8 @@
 
 import tensorflow as tf
 
-from object_detection.core import preprocessor
-from object_detection.protos import preprocessor_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import preprocessor
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import preprocessor_pb2
 
 
 def _get_step_config_from_proto(preprocessor_step_config, step_name):

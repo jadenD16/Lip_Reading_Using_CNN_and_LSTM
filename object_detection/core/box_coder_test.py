@@ -17,8 +17,8 @@
 
 import tensorflow as tf
 
-from object_detection.core import box_coder
-from object_detection.core import box_list
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import box_coder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import box_list
 
 
 class MockBoxCoder(box_coder.BoxCoder):

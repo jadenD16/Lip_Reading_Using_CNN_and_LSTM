@@ -18,7 +18,7 @@
 import numpy as np
 import tensorflow as tf
 
-from object_detection.utils import np_mask_ops
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import np_mask_ops
 
 
 class MaskOpsTests(tf.test.TestCase):

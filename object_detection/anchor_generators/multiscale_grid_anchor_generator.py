@@ -20,9 +20,9 @@ described in:
 T.-Y. Lin, P. Goyal, R. Girshick, K. He, P. Dollar
 """
 
-from object_detection.anchor_generators import grid_anchor_generator
-from object_detection.core import anchor_generator
-from object_detection.core import box_list_ops
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.anchor_generators import grid_anchor_generator
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import anchor_generator
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import box_list_ops
 
 
 class MultiscaleGridAnchorGenerator(anchor_generator.AnchorGenerator):

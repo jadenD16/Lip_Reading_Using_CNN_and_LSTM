@@ -39,10 +39,10 @@ import argparse
 import pandas as pd
 from google.protobuf import text_format
 
-from object_detection.metrics import io_utils
-from object_detection.metrics import oid_vrd_challenge_evaluation_utils as utils
-from object_detection.protos import string_int_label_map_pb2
-from object_detection.utils import vrd_evaluation
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.metrics import io_utils
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.metrics import oid_vrd_challenge_evaluation_utils as utils
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import string_int_label_map_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import vrd_evaluation
 
 
 def _load_labelmap(labelmap_path):

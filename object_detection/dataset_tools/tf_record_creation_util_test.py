@@ -18,7 +18,7 @@ import os
 import contextlib2
 import tensorflow as tf
 
-from object_detection.dataset_tools import tf_record_creation_util
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.dataset_tools import tf_record_creation_util
 
 
 class OpenOutputTfrecordsTests(tf.test.TestCase):

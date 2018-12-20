@@ -17,7 +17,7 @@ import os
 
 import tensorflow as tf
 
-from object_detection.utils import json_utils
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import json_utils
 
 
 class JsonUtilsTest(tf.test.TestCase):

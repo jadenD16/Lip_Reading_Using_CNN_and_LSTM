@@ -17,7 +17,7 @@
 
 import tensorflow as tf
 
-from object_detection.models import faster_rcnn_nas_feature_extractor as frcnn_nas
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.models import faster_rcnn_nas_feature_extractor as frcnn_nas
 
 
 class FasterRcnnNASFeatureExtractorTest(tf.test.TestCase):

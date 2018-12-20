@@ -16,7 +16,7 @@
 """Mask R-CNN Box Predictor."""
 import tensorflow as tf
 
-from object_detection.core import box_predictor
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import box_predictor
 
 slim = tf.contrib.slim
 

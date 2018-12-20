@@ -17,8 +17,8 @@
 import numpy as np
 import tensorflow as tf
 
-from object_detection.core import standard_fields
-from object_detection.utils import vrd_evaluation
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import standard_fields
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import vrd_evaluation
 
 
 class VRDRelationDetectionEvaluatorTest(tf.test.TestCase):

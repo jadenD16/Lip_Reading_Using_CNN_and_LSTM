@@ -96,17 +96,17 @@ from abc import abstractmethod
 from functools import partial
 import tensorflow as tf
 
-from object_detection.anchor_generators import grid_anchor_generator
-from object_detection.builders import box_predictor_builder
-from object_detection.core import box_list
-from object_detection.core import box_list_ops
-from object_detection.core import box_predictor
-from object_detection.core import losses
-from object_detection.core import model
-from object_detection.core import standard_fields as fields
-from object_detection.core import target_assigner
-from object_detection.utils import ops
-from object_detection.utils import shape_utils
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.anchor_generators import grid_anchor_generator
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.builders import box_predictor_builder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import box_list
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import box_list_ops
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import box_predictor
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import losses
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import model
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import standard_fields as fields
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import target_assigner
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import ops
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import shape_utils
 
 slim = tf.contrib.slim
 

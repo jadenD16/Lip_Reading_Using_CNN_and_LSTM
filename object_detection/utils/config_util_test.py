@@ -20,13 +20,13 @@ import tensorflow as tf
 
 from google.protobuf import text_format
 
-from object_detection.protos import eval_pb2
-from object_detection.protos import image_resizer_pb2
-from object_detection.protos import input_reader_pb2
-from object_detection.protos import model_pb2
-from object_detection.protos import pipeline_pb2
-from object_detection.protos import train_pb2
-from object_detection.utils import config_util
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import eval_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import image_resizer_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import input_reader_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import model_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import pipeline_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import train_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import config_util
 
 
 def _write_config(config, config_path):

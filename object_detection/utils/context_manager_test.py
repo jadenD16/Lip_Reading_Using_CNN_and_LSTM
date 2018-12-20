@@ -19,7 +19,7 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow as tf
-from object_detection.utils import context_manager
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import context_manager
 
 
 class ContextManagerTest(tf.test.TestCase):

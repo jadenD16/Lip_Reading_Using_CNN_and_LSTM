@@ -24,12 +24,12 @@ from tensorflow.python.platform import gfile
 from tensorflow.python.saved_model import signature_constants
 from tensorflow.python.tools import freeze_graph
 from tensorflow.python.training import saver as saver_lib
-from object_detection.builders import graph_rewriter_builder
-from object_detection.builders import model_builder
-from object_detection.core import standard_fields as fields
-from object_detection.data_decoders import tf_example_decoder
-from object_detection.utils import config_util
-from object_detection.utils import shape_utils
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.builders import graph_rewriter_builder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.builders import model_builder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import standard_fields as fields
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.data_decoders import tf_example_decoder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import config_util
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import shape_utils
 
 slim = tf.contrib.slim
 

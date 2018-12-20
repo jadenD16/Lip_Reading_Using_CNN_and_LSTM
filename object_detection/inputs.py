@@ -21,20 +21,20 @@ from __future__ import print_function
 import functools
 
 import tensorflow as tf
-from object_detection.builders import dataset_builder
-from object_detection.builders import image_resizer_builder
-from object_detection.builders import model_builder
-from object_detection.builders import preprocessor_builder
-from object_detection.core import preprocessor
-from object_detection.core import standard_fields as fields
-from object_detection.data_decoders import tf_example_decoder
-from object_detection.protos import eval_pb2
-from object_detection.protos import input_reader_pb2
-from object_detection.protos import model_pb2
-from object_detection.protos import train_pb2
-from object_detection.utils import config_util
-from object_detection.utils import ops as util_ops
-from object_detection.utils import shape_utils
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.builders import dataset_builder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.builders import image_resizer_builder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.builders import model_builder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.builders import preprocessor_builder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import preprocessor
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import standard_fields as fields
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.data_decoders import tf_example_decoder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import eval_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import input_reader_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import model_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import train_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import config_util
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import ops as util_ops
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import shape_utils
 
 HASH_KEY = 'hash'
 HASH_BINS = 1 << 31

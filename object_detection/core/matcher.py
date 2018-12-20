@@ -36,7 +36,7 @@ from abc import abstractmethod
 
 import tensorflow as tf
 
-from object_detection.utils import ops
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import ops
 
 
 class Match(object):

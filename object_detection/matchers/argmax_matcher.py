@@ -28,8 +28,8 @@ factory function for popular implementations.
 """
 import tensorflow as tf
 
-from object_detection.core import matcher
-from object_detection.utils import shape_utils
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import matcher
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import shape_utils
 
 
 class ArgMaxMatcher(matcher.Matcher):

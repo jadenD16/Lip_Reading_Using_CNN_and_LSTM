@@ -36,7 +36,7 @@ metrics).
 
 import itertools
 import tensorflow as tf
-from object_detection.inference import detection_inference
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.inference import detection_inference
 
 tf.flags.DEFINE_string('input_tfrecord_paths', None,
                        'A comma separated list of paths to input TFRecords.')

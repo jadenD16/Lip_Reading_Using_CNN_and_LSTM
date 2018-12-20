@@ -93,8 +93,8 @@ python object_detection/export_tflite_ssd_graph \
 
 import tensorflow as tf
 from google.protobuf import text_format
-from object_detection import export_tflite_ssd_graph_lib
-from object_detection.protos import pipeline_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection import export_tflite_ssd_graph_lib
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import pipeline_pb2
 
 flags = tf.app.flags
 flags.DEFINE_string('output_directory', None, 'Path to write outputs.')

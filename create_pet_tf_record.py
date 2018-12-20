@@ -40,7 +40,7 @@ from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import dataset_util
 from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import label_map_util
 
 flags = tf.app.flags
-flags.DEFINE_string('data_dir', '', 'C:\\Users\\Jaden\\PycharmProjects\\Thesis\\Lip_Reading_Using_CNN_and_LSTM\\images')
+flags.DEFINE_string('data_dir', 'C:\\Users\\Jaden\\PycharmProjects\\Thesis\\Lip_Reading_Using_CNN_and_LSTM', 'path to data')
 flags.DEFINE_string('output_dir', '', 'Path to directory to output TFRecords.')
 flags.DEFINE_string('label_map_path', 'C:\\Users\\Jaden\\PycharmProjects\\Thesis\\Lip_Reading_Using_CNN_and_LSTM\\training\\label.pbtxt',
                     'Path to label map proto')
@@ -203,7 +203,7 @@ def create_tf_record(output_filename,
                      annotations_dir,
                      image_dir,
                      examples,
-                     faces_only=True,
+                     faces_only=False,
                      mask_type='png'):
   """Creates a TFRecord file from examples.
   Args:

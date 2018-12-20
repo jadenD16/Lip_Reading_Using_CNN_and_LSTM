@@ -17,7 +17,7 @@
 
 import tensorflow as tf
 
-from object_detection.utils import static_shape
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import static_shape
 
 
 def _is_tensor(t):
@@ -306,6 +306,7 @@ def assert_shape_equal(shape_a, shape_b):
   Raises:
     ValueError: When shapes are both static and unequal.
   """
+
   if (all(isinstance(dim, int) for dim in shape_a) and
       all(isinstance(dim, int) for dim in shape_b)):
     if shape_a != shape_b:

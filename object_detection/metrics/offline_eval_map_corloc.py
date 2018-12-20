@@ -36,11 +36,11 @@ import os
 import re
 import tensorflow as tf
 
-from object_detection.core import standard_fields
-from object_detection.legacy import evaluator
-from object_detection.metrics import tf_example_parser
-from object_detection.utils import config_util
-from object_detection.utils import label_map_util
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import standard_fields
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.legacy import evaluator
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.metrics import tf_example_parser
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import config_util
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import label_map_util
 
 flags = tf.app.flags
 tf.logging.set_verbosity(tf.logging.INFO)

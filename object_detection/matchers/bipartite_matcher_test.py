@@ -17,7 +17,7 @@
 
 import tensorflow as tf
 
-from object_detection.matchers import bipartite_matcher
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.matchers import bipartite_matcher
 
 
 class GreedyBipartiteMatcherTest(tf.test.TestCase):

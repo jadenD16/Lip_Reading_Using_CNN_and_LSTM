@@ -16,9 +16,9 @@
 """Builder function to construct tf-slim arg_scope for convolution, fc ops."""
 import tensorflow as tf
 
-from object_detection.core import freezable_batch_norm
-from object_detection.protos import hyperparams_pb2
-from object_detection.utils import context_manager
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import freezable_batch_norm
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import hyperparams_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import context_manager
 
 slim = tf.contrib.slim
 

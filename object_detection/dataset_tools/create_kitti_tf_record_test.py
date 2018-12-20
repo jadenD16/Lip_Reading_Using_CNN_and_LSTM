@@ -21,7 +21,7 @@ import numpy as np
 import PIL.Image
 import tensorflow as tf
 
-from object_detection.dataset_tools import create_kitti_tf_record
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.dataset_tools import create_kitti_tf_record
 
 
 class CreateKittiTFRecordTest(tf.test.TestCase):

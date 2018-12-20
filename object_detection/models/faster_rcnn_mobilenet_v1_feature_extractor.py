@@ -18,9 +18,9 @@ import numpy as np
 
 import tensorflow as tf
 
-from object_detection.meta_architectures import faster_rcnn_meta_arch
-from object_detection.utils import shape_utils
-from nets import mobilenet_v1
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.meta_architectures import faster_rcnn_meta_arch
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import shape_utils
+from Lip_Reading_Using_CNN_and_LSTM.slim.nets import mobilenet_v1
 
 slim = tf.contrib.slim
 

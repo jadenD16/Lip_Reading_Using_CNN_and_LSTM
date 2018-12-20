@@ -1,0 +1,2 @@
+model_checkpoint_path: "C:\\Users\\Jaden\\PycharmProjects\\Thesis\\Lip_Reading_Using_CNN_and_LSTM\\training\\model.ckpt-0"
+all_model_checkpoint_paths: "C:\\Users\\Jaden\\PycharmProjects\\Thesis\\Lip_Reading_Using_CNN_and_LSTM\\training\\model.ckpt-0"

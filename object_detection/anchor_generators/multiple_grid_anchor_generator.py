@@ -27,9 +27,9 @@ import numpy as np
 
 import tensorflow as tf
 
-from object_detection.anchor_generators import grid_anchor_generator
-from object_detection.core import anchor_generator
-from object_detection.core import box_list_ops
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.anchor_generators import grid_anchor_generator
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import anchor_generator
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import box_list_ops
 
 
 class MultipleGridAnchorGenerator(anchor_generator.AnchorGenerator):

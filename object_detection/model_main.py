@@ -22,8 +22,8 @@ from absl import flags
 
 import tensorflow as tf
 
-from object_detection import model_hparams
-from object_detection import model_lib
+from Lip_Reading_Using_CNN_and_LSTM.object_detection import model_hparams
+from Lip_Reading_Using_CNN_and_LSTM.object_detection import model_lib
 
 flags.DEFINE_string(
     'model_dir', None, 'Path to output model directory '

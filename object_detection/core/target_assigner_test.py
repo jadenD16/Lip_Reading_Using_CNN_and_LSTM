@@ -17,15 +17,15 @@
 import numpy as np
 import tensorflow as tf
 
-from object_detection.box_coders import keypoint_box_coder
-from object_detection.box_coders import mean_stddev_box_coder
-from object_detection.core import box_list
-from object_detection.core import region_similarity_calculator
-from object_detection.core import standard_fields as fields
-from object_detection.core import target_assigner as targetassigner
-from object_detection.matchers import argmax_matcher
-from object_detection.matchers import bipartite_matcher
-from object_detection.utils import test_case
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.box_coders import keypoint_box_coder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.box_coders import mean_stddev_box_coder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import box_list
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import region_similarity_calculator
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import standard_fields as fields
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import target_assigner as targetassigner
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.matchers import argmax_matcher
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.matchers import bipartite_matcher
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import test_case
 
 
 class TargetAssignerTest(test_case.TestCase):

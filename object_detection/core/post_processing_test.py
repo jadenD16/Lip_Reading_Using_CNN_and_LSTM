@@ -16,9 +16,9 @@
 """Tests for tensorflow_models.object_detection.core.post_processing."""
 import numpy as np
 import tensorflow as tf
-from object_detection.core import post_processing
-from object_detection.core import standard_fields as fields
-from object_detection.utils import test_case
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import post_processing
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import standard_fields as fields
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import test_case
 
 
 class MulticlassNonMaxSuppressionTest(test_case.TestCase):

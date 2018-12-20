@@ -22,8 +22,8 @@ All the mask prediction heads have a predict function that receives the
 import math
 import tensorflow as tf
 
-from object_detection.predictors.heads import head
-from object_detection.utils import ops
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.predictors.heads import head
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import ops
 
 slim = tf.contrib.slim
 

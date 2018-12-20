@@ -17,8 +17,8 @@
 import numpy as np
 import tensorflow as tf
 
-from object_detection.anchor_generators import multiscale_grid_anchor_generator as mg
-from object_detection.utils import test_case
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.anchor_generators import multiscale_grid_anchor_generator as mg
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import test_case
 
 
 class MultiscaleGridAnchorGeneratorTest(test_case.TestCase):

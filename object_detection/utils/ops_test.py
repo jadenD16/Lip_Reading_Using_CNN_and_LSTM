@@ -17,9 +17,9 @@
 import numpy as np
 import tensorflow as tf
 
-from object_detection.core import standard_fields as fields
-from object_detection.utils import ops
-from object_detection.utils import test_case
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import standard_fields as fields
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import ops
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import test_case
 
 slim = tf.contrib.slim
 

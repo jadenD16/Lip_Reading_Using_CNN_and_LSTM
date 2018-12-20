@@ -17,8 +17,8 @@
 
 import tensorflow as tf
 from google.protobuf import text_format
-from object_detection.builders import post_processing_builder
-from object_detection.protos import post_processing_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.builders import post_processing_builder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import post_processing_pb2
 
 
 class PostProcessingBuilderTest(tf.test.TestCase):

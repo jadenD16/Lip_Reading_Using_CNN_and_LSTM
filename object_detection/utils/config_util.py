@@ -21,12 +21,12 @@ from google.protobuf import text_format
 
 from tensorflow.python.lib.io import file_io
 
-from object_detection.protos import eval_pb2
-from object_detection.protos import graph_rewriter_pb2
-from object_detection.protos import input_reader_pb2
-from object_detection.protos import model_pb2
-from object_detection.protos import pipeline_pb2
-from object_detection.protos import train_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import eval_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import graph_rewriter_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import input_reader_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import model_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import pipeline_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import train_pb2
 
 
 def get_image_resizer_config(model_config):

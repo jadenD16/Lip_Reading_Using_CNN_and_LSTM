@@ -18,10 +18,10 @@
 import tensorflow as tf
 
 from google.protobuf import text_format
-from object_detection.builders import losses_builder
-from object_detection.core import losses
-from object_detection.protos import losses_pb2
-from object_detection.utils import ops
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.builders import losses_builder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import losses
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import losses_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import ops
 
 
 class LocalizationLossBuilderTest(tf.test.TestCase):

@@ -16,7 +16,7 @@
 """Tests for object_detection.core.prefetcher."""
 import tensorflow as tf
 
-from object_detection.core import prefetcher
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import prefetcher
 
 slim = tf.contrib.slim
 

@@ -96,7 +96,7 @@ A typical conversion script will look like the following:
 
 import tensorflow as tf
 
-from object_detection.utils import dataset_util
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import dataset_util
 
 
 flags = tf.app.flags

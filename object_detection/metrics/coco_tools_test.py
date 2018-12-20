@@ -22,7 +22,7 @@ from pycocotools import mask
 
 import tensorflow as tf
 
-from object_detection.metrics import coco_tools
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.metrics import coco_tools
 
 
 class CocoToolsTest(tf.test.TestCase):

@@ -46,11 +46,11 @@ import json
 import os
 import tensorflow as tf
 
-from object_detection.builders import dataset_builder
-from object_detection.builders import graph_rewriter_builder
-from object_detection.builders import model_builder
-from object_detection.legacy import trainer
-from object_detection.utils import config_util
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.builders import dataset_builder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.builders import graph_rewriter_builder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.builders import model_builder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.legacy import trainer
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import config_util
 
 tf.logging.set_verbosity(tf.logging.INFO)
 
@@ -67,10 +67,10 @@ flags.DEFINE_integer('worker_replicas', 1, 'Number of worker+trainer '
 flags.DEFINE_integer('ps_tasks', 0,
                      'Number of parameter server tasks. If None, does not use '
                      'a parameter server.')
-flags.DEFINE_string('train_dir', '',
+flags.DEFINE_string('train_dir', 'C:\\Users\\Jaden\\PycharmProjects\\Thesis\\Lip_Reading_Using_CNN_and_LSTM\\training',
                     'Directory to save the checkpoints and training summaries.')
 
-flags.DEFINE_string('pipeline_config_path', '',
+flags.DEFINE_string('pipeline_config_path', 'C:\\Users\\Jaden\\PycharmProjects\\Thesis\\Lip_Reading_Using_CNN_and_LSTM\\object_detection\\mask_rcnn_inception_v2_coco_2018_01_28\\mask_rcnn_inception_v2_coco.config',
                     'Path to a pipeline_pb2.TrainEvalPipelineConfig config '
                     'file. If provided, other configs are ignored')
 

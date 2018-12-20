@@ -27,12 +27,12 @@ import tensorflow as tf
 from tensorflow.contrib.tpu.python.tpu import tpu_config
 from tensorflow.contrib.tpu.python.tpu import tpu_estimator
 
-from object_detection import inputs
-from object_detection import model_hparams
-from object_detection import model_lib
-from object_detection.builders import model_builder
-from object_detection.core import standard_fields as fields
-from object_detection.utils import config_util
+from Lip_Reading_Using_CNN_and_LSTM.object_detection import inputs
+from Lip_Reading_Using_CNN_and_LSTM.object_detection import model_hparams
+from Lip_Reading_Using_CNN_and_LSTM.object_detection import model_lib
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.builders import model_builder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import standard_fields as fields
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import config_util
 
 
 # Model for test. Options are:

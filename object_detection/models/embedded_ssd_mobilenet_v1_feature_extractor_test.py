@@ -17,8 +17,8 @@
 import numpy as np
 import tensorflow as tf
 
-from object_detection.models import embedded_ssd_mobilenet_v1_feature_extractor
-from object_detection.models import ssd_feature_extractor_test
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.models import embedded_ssd_mobilenet_v1_feature_extractor
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.models import ssd_feature_extractor_test
 
 
 class EmbeddedSSDMobileNetV1FeatureExtractorTest(

@@ -22,10 +22,10 @@ from absl.testing import parameterized
 
 import tensorflow as tf
 
-from object_detection import eval_util
-from object_detection.core import standard_fields as fields
-from object_detection.protos import eval_pb2
-from object_detection.utils import test_case
+from Lip_Reading_Using_CNN_and_LSTM.object_detection import eval_util
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import standard_fields as fields
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import eval_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import test_case
 
 
 class EvalUtilTest(test_case.TestCase, parameterized.TestCase):

@@ -18,8 +18,8 @@ import collections
 
 import tensorflow as tf
 
-from object_detection.core import box_predictor
-from object_detection.utils import static_shape
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import box_predictor
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import static_shape
 
 keras = tf.keras.layers
 

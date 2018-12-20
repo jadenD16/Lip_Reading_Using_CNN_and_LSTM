@@ -19,7 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from object_detection.core import standard_fields
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import standard_fields
 
 
 def build_groundtruth_boxes_dictionary(data, class_label_map):

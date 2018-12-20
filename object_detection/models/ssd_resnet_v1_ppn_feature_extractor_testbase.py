@@ -17,7 +17,7 @@ import abc
 import numpy as np
 import tensorflow as tf
 
-from object_detection.models import ssd_feature_extractor_test
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.models import ssd_feature_extractor_test
 
 
 class SSDResnetPpnFeatureExtractorTestBase(

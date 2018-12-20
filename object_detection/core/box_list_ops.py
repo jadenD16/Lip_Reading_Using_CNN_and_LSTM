@@ -25,9 +25,9 @@ BoxList are retained unless documented otherwise.
 """
 import tensorflow as tf
 
-from object_detection.core import box_list
-from object_detection.utils import ops
-from object_detection.utils import shape_utils
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import box_list
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import ops
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import shape_utils
 
 
 class SortOrder(object):

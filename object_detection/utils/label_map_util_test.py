@@ -18,8 +18,8 @@ import os
 import tensorflow as tf
 
 from google.protobuf import text_format
-from object_detection.protos import string_int_label_map_pb2
-from object_detection.utils import label_map_util
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import string_int_label_map_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import label_map_util
 
 
 class LabelMapUtilTest(tf.test.TestCase):

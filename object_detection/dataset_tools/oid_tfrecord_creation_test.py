@@ -17,7 +17,7 @@
 import pandas as pd
 import tensorflow as tf
 
-from object_detection.dataset_tools import oid_tfrecord_creation
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.dataset_tools import oid_tfrecord_creation
 
 
 def create_test_data():

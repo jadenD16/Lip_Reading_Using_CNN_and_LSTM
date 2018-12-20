@@ -93,8 +93,8 @@ python export_inference_graph \
 """
 import tensorflow as tf
 from google.protobuf import text_format
-from object_detection import exporter
-from object_detection.protos import pipeline_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection import exporter
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import pipeline_pb2
 
 slim = tf.contrib.slim
 flags = tf.app.flags

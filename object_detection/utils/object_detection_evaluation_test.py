@@ -18,9 +18,9 @@
 from absl.testing import parameterized
 import numpy as np
 import tensorflow as tf
-from object_detection import eval_util
-from object_detection.core import standard_fields
-from object_detection.utils import object_detection_evaluation
+from Lip_Reading_Using_CNN_and_LSTM.object_detection import eval_util
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import standard_fields
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import object_detection_evaluation
 
 
 class OpenImagesV2EvaluationTest(tf.test.TestCase):

@@ -35,10 +35,10 @@ import unicodedata
 import numpy as np
 import tensorflow as tf
 
-from object_detection.core import standard_fields
-from object_detection.utils import label_map_util
-from object_detection.utils import metrics
-from object_detection.utils import per_image_evaluation
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import standard_fields
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import label_map_util
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import metrics
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import per_image_evaluation
 
 
 class DetectionEvaluator(object):

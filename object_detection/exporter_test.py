@@ -21,13 +21,13 @@ import tensorflow as tf
 from google.protobuf import text_format
 from tensorflow.python.framework import dtypes
 from tensorflow.python.ops import array_ops
-from object_detection import exporter
-from object_detection.builders import graph_rewriter_builder
-from object_detection.builders import model_builder
-from object_detection.core import model
-from object_detection.protos import graph_rewriter_pb2
-from object_detection.protos import pipeline_pb2
-from object_detection.utils import ops
+from Lip_Reading_Using_CNN_and_LSTM.object_detection import exporter
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.builders import graph_rewriter_builder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.builders import model_builder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import model
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import graph_rewriter_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import pipeline_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import ops
 
 if six.PY2:
   import mock  # pylint: disable=g-import-not-at-top

@@ -17,16 +17,16 @@
 
 import collections
 import tensorflow as tf
-from object_detection.predictors import convolutional_box_predictor
-from object_detection.predictors import convolutional_keras_box_predictor
-from object_detection.predictors import mask_rcnn_box_predictor
-from object_detection.predictors import rfcn_box_predictor
-from object_detection.predictors.heads import box_head
-from object_detection.predictors.heads import class_head
-from object_detection.predictors.heads import keras_box_head
-from object_detection.predictors.heads import keras_class_head
-from object_detection.predictors.heads import mask_head
-from object_detection.protos import box_predictor_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.predictors import convolutional_box_predictor
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.predictors import convolutional_keras_box_predictor
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.predictors import mask_rcnn_box_predictor
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.predictors import rfcn_box_predictor
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.predictors.heads import box_head
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.predictors.heads import class_head
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.predictors.heads import keras_box_head
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.predictors.heads import keras_class_head
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.predictors.heads import mask_head
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import box_predictor_pb2
 
 
 def build_convolutional_box_predictor(is_training,

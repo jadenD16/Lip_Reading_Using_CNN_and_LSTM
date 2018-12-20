@@ -21,8 +21,8 @@ Example box operations that are supported:
 """
 import numpy as np
 
-from object_detection.utils import np_box_list
-from object_detection.utils import np_box_ops
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import np_box_list
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import np_box_ops
 
 
 class SortOrder(object):

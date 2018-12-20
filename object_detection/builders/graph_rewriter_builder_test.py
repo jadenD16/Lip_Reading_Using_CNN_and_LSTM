@@ -15,8 +15,8 @@
 """Tests for graph_rewriter_builder."""
 import mock
 import tensorflow as tf
-from object_detection.builders import graph_rewriter_builder
-from object_detection.protos import graph_rewriter_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.builders import graph_rewriter_builder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import graph_rewriter_pb2
 
 
 class QuantizationBuilderTest(tf.test.TestCase):

@@ -24,7 +24,7 @@ objects.
 """
 import tensorflow as tf
 
-from object_detection.predictors.heads import head
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.predictors.heads import head
 slim = tf.contrib.slim
 
 

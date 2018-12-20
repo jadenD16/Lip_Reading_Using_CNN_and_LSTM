@@ -18,11 +18,11 @@ import numpy as np
 import tensorflow as tf
 
 from google.protobuf import text_format
-from object_detection.builders import box_predictor_builder
-from object_detection.builders import hyperparams_builder
-from object_detection.predictors import mask_rcnn_box_predictor as box_predictor
-from object_detection.protos import hyperparams_pb2
-from object_detection.utils import test_case
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.builders import box_predictor_builder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.builders import hyperparams_builder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.predictors import mask_rcnn_box_predictor as box_predictor
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import hyperparams_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import test_case
 
 
 class MaskRCNNBoxPredictorTest(test_case.TestCase):

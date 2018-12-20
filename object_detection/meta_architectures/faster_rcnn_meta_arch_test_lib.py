@@ -21,21 +21,21 @@ import numpy as np
 import tensorflow as tf
 
 from google.protobuf import text_format
-from object_detection.anchor_generators import grid_anchor_generator
-from object_detection.builders import box_predictor_builder
-from object_detection.builders import hyperparams_builder
-from object_detection.builders import post_processing_builder
-from object_detection.core import balanced_positive_negative_sampler as sampler
-from object_detection.core import losses
-from object_detection.core import post_processing
-from object_detection.core import target_assigner
-from object_detection.meta_architectures import faster_rcnn_meta_arch
-from object_detection.protos import box_predictor_pb2
-from object_detection.protos import hyperparams_pb2
-from object_detection.protos import post_processing_pb2
-from object_detection.utils import ops
-from object_detection.utils import test_case
-from object_detection.utils import test_utils
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.anchor_generators import grid_anchor_generator
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.builders import box_predictor_builder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.builders import hyperparams_builder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.builders import post_processing_builder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import balanced_positive_negative_sampler as sampler
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import losses
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import post_processing
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import target_assigner
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.meta_architectures import faster_rcnn_meta_arch
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import box_predictor_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import hyperparams_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import post_processing_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import ops
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import test_case
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import test_utils
 
 slim = tf.contrib.slim
 BOX_CODE_SIZE = 4

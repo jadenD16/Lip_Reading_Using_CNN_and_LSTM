@@ -26,8 +26,8 @@ from absl import flags
 import tensorflow as tf
 
 
-from object_detection import model_hparams
-from object_detection import model_lib
+from Lip_Reading_Using_CNN_and_LSTM.object_detection import model_hparams
+from Lip_Reading_Using_CNN_and_LSTM.object_detection import model_lib
 
 tf.flags.DEFINE_bool('use_tpu', True, 'Use TPUs rather than plain CPUs')
 

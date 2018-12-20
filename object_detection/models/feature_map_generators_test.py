@@ -21,9 +21,9 @@ import tensorflow as tf
 
 from google.protobuf import text_format
 
-from object_detection.builders import hyperparams_builder
-from object_detection.models import feature_map_generators
-from object_detection.protos import hyperparams_pb2
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.builders import hyperparams_builder
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.models import feature_map_generators
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.protos import hyperparams_pb2
 
 INCEPTION_V2_LAYOUT = {
     'from_layer': ['Mixed_3c', 'Mixed_4c', 'Mixed_5c', '', '', ''],

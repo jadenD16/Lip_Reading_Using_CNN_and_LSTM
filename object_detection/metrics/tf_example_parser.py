@@ -20,8 +20,8 @@ protos into materialized tensors (numpy arrays).
 
 import numpy as np
 
-from object_detection.core import data_parser
-from object_detection.core import standard_fields as fields
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import data_parser
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import standard_fields as fields
 
 
 class FloatParser(data_parser.DataToNumpyParser):

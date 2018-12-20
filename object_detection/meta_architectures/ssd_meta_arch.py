@@ -21,14 +21,14 @@ from abc import abstractmethod
 
 import tensorflow as tf
 
-from object_detection.core import box_list
-from object_detection.core import box_list_ops
-from object_detection.core import model
-from object_detection.core import standard_fields as fields
-from object_detection.core import target_assigner
-from object_detection.utils import ops
-from object_detection.utils import shape_utils
-from object_detection.utils import visualization_utils
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import box_list
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import box_list_ops
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import model
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import standard_fields as fields
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.core import target_assigner
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import ops
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import shape_utils
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import visualization_utils
 
 slim = tf.contrib.slim
 
