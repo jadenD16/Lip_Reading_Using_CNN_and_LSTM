@@ -104,16 +104,13 @@ class Player(Tk.Frame):
         self.canvas = Tk.Canvas(self.videopanel).pack(fill=Tk.BOTH, expand=1)
         self.videopanel.pack(fill=Tk.BOTH, expand=1)
 
-
+        #PANELS FOR CONTROLS
         ctrlpanel = ttk.Frame(self.parent)
         lipRead =ttk.Button(ctrlpanel, text="Lip Read")
         pause = ttk.Button(ctrlpanel, text="Pause", command=self.OnPause)
         play = ttk.Button(ctrlpanel, text="Play", command=self.OnPlay)
         stop = ttk.Button(ctrlpanel, text="Stop", command=self.OnStop)
         volume = ttk.Button(ctrlpanel, text="Volume", command=self.OnSetVolume)
-
-        text = ttk.Label(ctrlpanel,text="text here")
-        text.pack(side=Tk.TOP)
         lipRead.pack(side=Tk.LEFT)
         pause.pack(side=Tk.LEFT)
         play.pack(side=Tk.LEFT)
@@ -172,7 +169,8 @@ class Player(Tk.Frame):
             dirname = os.path.dirname(fullname)
             filename = os.path.basename(fullname)
             # Creation
-            #display it in the video
+
+            #DISPLAY VIDEO
             self.Media = self.Instance.media_new(str(os.path.join(dirname, filename)))
             self.player.set_media(self.Media)
             # Report the title of the file chosen
@@ -330,8 +328,6 @@ if __name__ == "__main__":
     root.resizable(0,0)
     root.protocol("WM_DELETE_WINDOW", _quit)
     root.state('zoomed')
-
-    leftFrame = ttk.Frame(root)
     player = Player(root, title="tkinter vlc")
     # show the player window centred and run the application
     root.mainloop()
