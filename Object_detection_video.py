@@ -22,19 +22,24 @@ import cv2
 import numpy as np
 import tensorflow as tf
 import sys
+import dlib
+from imutils import face_utils
 
 # This is needed since the notebook is stored in the object_detection folder.
 sys.path.append("..")
 
 # Import utilites
-from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import label_map_util
-from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import visualization_utils as vis_util
+from utils import label_map_util
+from utils import visualization_utils as vis_util
+
+# p = our pre-treined model directory, on my case, it's on the same script's diretory.
+p = "C:/Users/javinarfamily/PycharmProjects/Thesis/Lip_Reading_Using_CNN_and_LSTM/process_image/shape_predictor_68_face_landmarks.dat"
+detector = dlib.get_frontal_face_detector()
+predictor = dlib.shape_predictor(p)
 
 # Name of the directory containing the object detection module we're using
-MODEL_NAME = 'C:\\Users\\Jaden\\PycharmProjects\\Thesis\\\Lip_Reading_Using_CNN_and_LSTM\\inference_graph'
-VIDEO_NAME = 'D:\\Datasets\\s1\\bbaf2n.mpg'
-
-
+MODEL_NAME = 'C:/Users/javinarfamily/PycharmProjects/Thesis/Lip_Reading_Using_CNN_and_LSTM/inference_graph'
+VIDEO_NAME = 'D:/RawDatasets/s1/bbaf2n.mpg'
 
 # Grab path to current working directory
 CWD_PATH = os.getcwd()
@@ -47,6 +52,7 @@ PATH_TO_CKPT = os.path.join(CWD_PATH,MODEL_NAME,'frozen_inference_graph.pb')
 PATH_TO_LABELS = os.path.join(CWD_PATH,'training','label.pbtxt')
 
 # Path to video
+
 PATH_TO_VIDEO = os.path.join(CWD_PATH,VIDEO_NAME)
 
 # Number of classes the object detector can identify
@@ -92,6 +98,8 @@ num_detections = detection_graph.get_tensor_by_name('num_detections:0')
 # Open video file
 video = cv2.VideoCapture(PATH_TO_VIDEO)
 
+
+
 while(video.isOpened()):
 
     # Acquire frame and expand frame dimensions to have shape: [1, None, None, 3]
@@ -99,27 +107,38 @@ while(video.isOpened()):
     ret, frame = video.read()
     frame_expanded = np.expand_dims(frame, axis=0)
 
+    #converting the images to gray scale
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    rects = detector(gray, 0)
+    mask = np.zeros(frame.shape, dtype="uint8")
     # Perform the actual detection by running the model with the image as input
     (boxes, scores, classes, num) = sess.run(
         [detection_boxes, detection_scores, detection_classes, num_detections],
         feed_dict={image_tensor: frame_expanded})
+    for (i, rect) in enumerate(rects):
+        shape = predictor(gray, rect)
+        shape = face_utils.shape_to_np(shape)
 
-    # Draw the results of the detection (aka 'visulaize the results')
-    a=vis_util.visualize_boxes_and_labels_on_image_array(
-        frame,
-        np.squeeze(boxes),
-        np.squeeze(classes).astype(np.int32),
-        np.squeeze(scores),
-        category_index,
-        use_normalized_coordinates=True,
-        line_thickness=8,
-        min_score_thresh=0.80)
-
-    print(a)
+        cv2.polylines(frame, [shape[48:67]], True, (0, 255, 255))
+        # Draw the results of the detection (aka 'visulaize the results')
+        a=vis_util.visualize_boxes_and_labels_on_image_array(
+            frame,
+            np.squeeze(boxes),
+            np.squeeze(classes).astype(np.int32),
+            np.squeeze(scores),
+            category_index,
+            use_normalized_coordinates=True,
+            line_thickness=2,
+            min_score_thresh=0.80)
+        print(a)
+        print([shape[48:67]])
     # All the results have been drawn on the frame, so it's time to display it.
     cv2.imshow('Object detector', frame)
 
-    cv2.waitKey(1)
+    # Press 'q' to quit
+    if cv2.waitKey(1) == ord('q'):
+        break
 
 # Clean up
 video.release()
