@@ -64,7 +64,7 @@ STANDARD_COLORS = [
     'WhiteSmoke', 'Yellow', 'YellowGreen'
 ]
 
-
+area = []
 def save_image_array_as_png(image, output_path):
   """Saves an image (represented as a numpy array) to PNG.
 
@@ -742,6 +742,7 @@ def visualize_boxes_and_labels_on_image_array(
         thickness=line_thickness,
         display_str_list=box_to_display_str_map[box],
         use_normalized_coordinates=use_normalized_coordinates)
+    area = [xmin,ymin,xmax,ymax]
     if keypoints is not None:
       draw_keypoints_on_image_array(
           image,
@@ -750,7 +751,7 @@ def visualize_boxes_and_labels_on_image_array(
           radius=line_thickness / 2,
           use_normalized_coordinates=use_normalized_coordinates)
 
-  return image
+  return image,area
 
 
 def add_cdf_image_summary(values, name):

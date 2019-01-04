@@ -1,12 +1,11 @@
-######## Video Object Detection Using Tensorflow-trained Classifier #########
+######## Image Object Detection Using Tensorflow-trained Classifier #########
 #
 # Author: Evan Juras
-# Date: 1/16/18
+# Date: 1/15/18
 # Description: 
 # This program uses a TensorFlow-trained classifier to perform object detection.
-# It loads the classifier uses it to perform object detection on a video.
-# It draws boxes and scores around the objects of interest in each frame
-# of the video.
+# It loads the classifier uses it to perform object detection on an image.
+# It draws boxes and scores around the objects of interest in the image.
 
 ## Some of the code is copied from Google's example at
 ## https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb
@@ -22,24 +21,13 @@ import cv2
 import numpy as np
 import tensorflow as tf
 import sys
-
-from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import label_map_util
-from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import visualization_utils as vis_util
-
-def unnormalize_coordinates(xmin, ymin, xmax, ymax, img):
-    num_rows, num_cols = img.shape[:2]
-    xmax = xmax * (num_cols - 1.)
-    xmin = xmin*(num_cols - 1.)
-    ymax = ymax * (num_rows - 1.)
-    ymin = ymin*(num_rows - 1.)
-    return xmin,ymin,xmax,ymax
-
+import dlib
+from imutils import face_utils
 # This is needed since the notebook is stored in the object_detection folder.
 sys.path.append("..")
 
-# Name of the directory containing the object detection module we're using
-MODEL_NAME = 'C:/Users/Jaden/PycharmProjects/Thesis/Lip_Reading_Using_CNN_and_LSTM/inference_graph'
-VIDEO_NAME = 'D:/Datasets/s1/bbaf2n.mpg'
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import label_map_util
+from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import visualization_utils as vis_util
 
 # Grab path to current working directory
 CWD_PATH = os.getcwd()
@@ -51,11 +39,11 @@ PATH_TO_CKPT = os.path.join(CWD_PATH,MODEL_NAME,'frozen_inference_graph.pb')
 # Path to label map file
 PATH_TO_LABELS = os.path.join(CWD_PATH,'training','label.pbtxt')
 
-# Path to video
-PATH_TO_VIDEO = os.path.join(CWD_PATH,VIDEO_NAME)
+# Path to image
+PATH_TO_IMAGE = os.path.join(CWD_PATH,IMAGE_NAME)
 
 # Number of classes the object detector can identify
-NUM_CLASSES = 6
+NUM_CLASSES = 1
 
 # Load the label map.
 # Label maps map indices to category names, so that when our convolution
@@ -94,46 +82,40 @@ detection_classes = detection_graph.get_tensor_by_name('detection_classes:0')
 # Number of objects detected
 num_detections = detection_graph.get_tensor_by_name('num_detections:0')
 
-# Open video file
-video = cv2.VideoCapture(PATH_TO_VIDEO)
+# Load image using OpenCV and
+# expand image dimensions to have shape: [1, None, None, 3]
+# i.e. a single-column array, where each item in the column has the pixel RGB value
+image = cv2.imread(PATH_TO_IMAGE)
+image_expanded = np.expand_dims(image, axis=0)
 
-while(video.isOpened()):
+# Perform the actual detection by running the model with the image as input
+(boxes, scores, classes, num) = sess.run(
+    [detection_boxes, detection_scores, detection_classes, num_detections],
+    feed_dict={image_tensor: image_expanded})
 
-    # Acquire frame and expand frame dimensions to have shape: [1, None, None, 3]
-    # i.e. a single-column array, where each item in the column has the pixel RGB value
-    ret, frame = video.read()
-    frame_expanded = np.expand_dims(frame, axis=0)
 
-    # Perform the actual detection by running the model with the image as input
-    (boxes, scores, classes, num) = sess.run(
-        [detection_boxes, detection_scores, detection_classes, num_detections],
-        feed_dict={image_tensor: frame_expanded})
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+rects = detector(gray, 0)
+mask = np.zeros(image.shape, dtype = "uint8")
 
-    # Draw the results of the detection (aka 'visulaize the results')
-    image, area=vis_util.visualize_boxes_and_labels_on_image_array(
-        frame,
-        np.squeeze(boxes),
-        np.squeeze(classes).astype(np.int32),
-        np.squeeze(scores),
-        category_index,
-        use_normalized_coordinates=True,
-        line_thickness=8,
-        min_score_thresh=0.80)
+# Draw the results of the detection (aka 'visulaize the results')
+a=vis_util.visualize_boxes_and_labels_on_image_array(
+    image,
+    np.squeeze(boxes),
+    np.squeeze(classes).astype(np.int32),
+    np.squeeze(scores),
+    category_index,
+    use_normalized_coordinates=True,
+    line_thickness=3,
+    min_score_thresh=0.80)
 
-    box=unnormalize_coordinates(area[0], area[1], area[2], area[3],image)
+print(a)
 
-    areaToCrop = np.round(box)
+# All the results have been drawn on image. Now display the image.
+cv2.imshow('Object detector', image)
 
-    cropped=frame[int(areaToCrop[2]):int(areaToCrop[3]), int(areaToCrop[0]):int(areaToCrop[1])]
-
-    # All the results have been drawn on the frame, so it's time to display it.
-    cv2.imshow('Object detector', frame)
-
-    print(cropped)
-    print('------------------------------------------------------------------------')
-
-    cv2.waitKey(1)
+# Press any key to close the image
+cv2.waitKey(0)
 
 # Clean up
-video.release()
 cv2.destroyAllWindows()
