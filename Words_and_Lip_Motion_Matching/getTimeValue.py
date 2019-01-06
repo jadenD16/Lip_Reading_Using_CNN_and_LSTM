@@ -4,11 +4,11 @@ import cv2
 import numpy as np
 
 # p = our pre-treined model directory, on my case, it's on the same script's diretory.
-p = "C:\\Users\\Jaden\\Downloads\\shape_predictor_68_face_landmarks.dat"
+p = "C:/Users/javinarfamily/PycharmProjects/Thesis/Lip_Reading_Using_CNN_and_LSTM/process_image/shape_predictor_68_face_landmarks.dat"
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor(p)
 
-cap = cv2.VideoCapture('D:\\Datasets\\s1\\bbaf2n.mpg')
+cap = cv2.VideoCapture('D:\\RawDatasets\\s1\\bbaf2n.mpg')
 
 while True:
     # Getting out image by webcam
