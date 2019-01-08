@@ -11,6 +11,7 @@ for cnt1 in range(1, 33):
     if cnt1 != 8 and cnt1 != 21:
         vidPath = source_video_path +'s'+str(cnt1)+'/'
         videoname_list = next(os.walk(vidPath))
+        print(videoname_list)
         speaker_input_train =[]
         speaker_output_train = []
         speaker_input_test = []

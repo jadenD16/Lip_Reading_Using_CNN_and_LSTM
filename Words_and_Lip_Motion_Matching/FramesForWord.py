@@ -1,13 +1,16 @@
 import numpy
 import os
 
-source_video_path = '/Users/ramkishore31/Neural Networks/final_project/dataset/lowquality_mouthnormalization/speaker'
-source_wordalignment_path = '/Users/ramkishore31/Neural Networks/final_project/dataset/lowquality_mouthnormalization3/align'
-destination_path = '/Users/ramkishore31/Neural Networks/final_project/dataset/lowquality_wordalignment/'
+source_video_path = 'D:/RawDatasets/final_project/dataset/lowquality_mouthnormalization/speaker/s'
+source_wordalignment_path = 'D:/RawDatasets/final_project/dataset/lowquality_mouthnormalization/align'
+destination_path = 'D:/RawDatasets/final_project/dataset/lowquality_wordalignment/'
+
 
 for cnt1 in range(1,33):
-    if cnt1 != 8 and cnt1 != 21:
-        videoname_list = next(os.walk(source_video_path + str(cnt1)+'/'))[1]
+    if cnt1 != 8:
+        vidPath = source_video_path + str(cnt1)+'/'
+        videoname_list = next(os.walk(vidPath))[2]
+        print(source_video_path + str(cnt1)+'/')
         speaker_input_train =[]
         speaker_output_train = []
         speaker_input_test = []
@@ -15,7 +18,7 @@ for cnt1 in range(1,33):
         word_dict = {}
         for video_name in videoname_list:
             align_filename = video_name.split('.', 1)[0] + ".align"
-            fileptr = open(source_wordalignment_path + str(cnt1)+'/'+align_filename, "r+")
+            fileptr = open(source_wordalignment_path +'/s'+ str(cnt1)+'/align/'+align_filename, "r+")
             sentence_framesdata = fileptr.read().splitlines()
             for word_framedata in sentence_framesdata:
                  test_flag = False
@@ -38,28 +41,32 @@ for cnt1 in range(1,33):
 
                  if word != "sil":
                     while starting_frame <= ending_frame:
-                        f = open(source_video_path + str(cnt1)+'/'+video_name+'/'+str(starting_frame),"rb")
+                        f = open(source_video_path + str(cnt1)+'/'+video_name+'/'+str(int(starting_frame)),"rb")
+                        print('ediwow')
                         image = numpy.load(f)
-                        image = numpy.resize(image,1600)
+                        image = numpy.resize(image, 1600)
                         word_array[word_index] = image
                         word_index += 1
                         starting_frame += 1
 
                     if test_flag == False:
+                        print('nyekkkkkkkkk')
                         speaker_input_train.append(word_array)
                         speaker_output_train.append(word)
                     else:
+                        print('wooow')
                         speaker_input_test.append(word_array)
                         speaker_output_test.append(word)
+
         speaker_input_train = numpy.asarray(speaker_input_train)
         speaker_input_test = numpy.asarray(speaker_input_test)
 
     if not os.path.exists(destination_path):
         os.makedirs(destination_path)
-    f1 =open(destination_path + 'speaker_input_train'+str(cnt1),"wb")
+    f1 = open(destination_path + 'speaker_input_train'+str(cnt1) + '.npz',"wb")
     numpy.savez_compressed(f1,speaker_input_train)
 
-    f2 = open(destination_path + 'speaker_input_test'+str(cnt1),"wb")
+    f2 = open(destination_path + 'speaker_input_test'+str(cnt1) + '.npz',"wb")
     numpy.savez_compressed(f2,speaker_input_test)
 
     f3 = open(destination_path + 'speaker_output_train'+str(cnt1),"wb")

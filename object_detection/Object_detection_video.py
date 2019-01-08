@@ -126,13 +126,8 @@ while(video.isOpened()):
 
     cropped=frame[int(areaToCrop[2]):int(areaToCrop[3]), int(areaToCrop[0]):int(areaToCrop[1])]
 
-    # All the results have been drawn on the frame, so it's time to display it.
-    cv2.imshow('Object detector', frame)
-
     print(cropped)
     print('------------------------------------------------------------------------')
-
-    cv2.waitKey(1)
 
 # Clean up
 video.release()
