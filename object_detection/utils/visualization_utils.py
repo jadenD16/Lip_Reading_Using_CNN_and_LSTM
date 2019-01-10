@@ -100,7 +100,7 @@ def draw_bounding_box_on_image_array(image,
                                      ymax,
                                      xmax,
                                      color='red',
-                                     thickness=4,
+                                     thickness=2,
                                      display_str_list=(),
                                      use_normalized_coordinates=True):
   """Adds a bounding box to an image (numpy array).

@@ -1,13 +1,13 @@
 import numpy
 import os
 
-source_video_path = 'D:/RawDatasets/final_project/dataset/lowquality_mouthnormalization/speaker/s'
-source_wordalignment_path = 'D:/RawDatasets/final_project/dataset/lowquality_mouthnormalization/align'
-destination_path = 'D:/RawDatasets/final_project/dataset/lowquality_wordalignment/'
+source_video_path = 'D:/Datasets/s'
+source_wordalignment_path = 'D:/Datasets\picts/align'
+destination_path = 'D:/Datasets/picts'
 
 
 for cnt1 in range(1,33):
-    if cnt1 != 8:
+    if cnt1 != 8 and cnt1 != 8 and cnt1 != 8:
         vidPath = source_video_path + str(cnt1)+'/'
         videoname_list = next(os.walk(vidPath))[2]
         print(source_video_path + str(cnt1)+'/')
