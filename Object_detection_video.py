@@ -1,38 +1,29 @@
-######## Video Object Detection Using Tensorflow-trained Classifier #########
-#
-# Author: Evan Juras
-# Date: 1/16/18
-# Description: 
-# This program uses a TensorFlow-trained classifier to perform object detection.
-# It loads the classifier uses it to perform object detection on a video.
-# It draws boxes and scores around the objects of interest in each frame
-# of the video.
-
-## Some of the code is copied from Google's example at
-## https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb
-
-## and some is copied from Dat Tran's example at
-## https://github.com/datitran/object_detector_app/blob/master/object_detection_app.py
-
-## but I changed it to make it more understandable to me.
-
 # Import packages
 import os
 import cv2
 import numpy as np
 import tensorflow as tf
 import sys
-
 from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import label_map_util
 from Lip_Reading_Using_CNN_and_LSTM.object_detection.utils import visualization_utils as vis_util
 
 def unnormalize_coordinates(xmin, ymin, xmax, ymax, img):
     num_rows, num_cols = img.shape[:2]
-    xmax = xmax * (num_cols - 1.)
-    xmin = xmin*(num_cols - 1.)
-    ymax = ymax * (num_rows - 1.)
-    ymin = ymin*(num_rows - 1.)
+    xmax = (xmax * (num_cols - 1.))-6
+    xmin = (xmin*(num_cols - 1.))+7
+    ymax = (ymax * (num_rows - 1.))-3
+    ymin = (ymin*(num_rows - 1.))+6
     return xmin,ymin,xmax,ymax
+
+def normalizedMouth(mouth):
+
+    image_min = mouth[mouth > 0].min()
+    image_max = mouth[mouth > 0].max()
+
+    mouth = (mouth - image_min) / (float(image_max - image_min))
+
+    return mouth
+
 
 # This is needed since the notebook is stored in the object_detection folder.
 sys.path.append("..")
@@ -41,6 +32,7 @@ sys.path.append("..")
 MODEL_NAME = 'C:/Users/Jaden/PycharmProjects/Thesis/Lip_Reading_Using_CNN_and_LSTM/inference_graph'
 VIDEO_NAME = 'D:/Datasets/s1/bbaf2n.mpg'
 
+counter=0
 # Grab path to current working directory
 CWD_PATH = os.getcwd()
 
@@ -102,6 +94,9 @@ while(video.isOpened()):
     # Acquire frame and expand frame dimensions to have shape: [1, None, None, 3]
     # i.e. a single-column array, where each item in the column has the pixel RGB value
     ret, frame = video.read()
+
+    tryput = frame
+
     frame_expanded = np.expand_dims(frame, axis=0)
 
     # Perform the actual detection by running the model with the image as input
@@ -120,19 +115,20 @@ while(video.isOpened()):
         line_thickness=8,
         min_score_thresh=0.80)
 
-    box=unnormalize_coordinates(area[0], area[1], area[2], area[3],image)
+    box =unnormalize_coordinates(area[0], area[1], area[2], area[3],image)
 
-    areaToCrop = np.round(box)
+    print(np.shape(image))
 
-    cropped=frame[int(areaToCrop[2]):int(areaToCrop[3]), int(areaToCrop[0]):int(areaToCrop[1])]
+    cropped=tryput[int(box[1]):int(box[3]), int(box[0]):int(box[2])]
 
-    # All the results have been drawn on the frame, so it's time to display it.
-    cv2.imshow('Object detector', frame)
+    normMouth = normalizedMouth(cropped)
 
-    print(cropped)
-    print('------------------------------------------------------------------------')
+    print(len(cropped))
 
+    cv2.imshow("mouth", cropped)
     cv2.waitKey(1)
+    # All the results have been drawn on the frame, so it's time to display it.
+    counter+=1
 
 # Clean up
 video.release()

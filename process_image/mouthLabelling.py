@@ -35,7 +35,7 @@ for filename in glob.glob('D:\\Datasets\\**\\*.mpg'):
 
             if (evenPicker%2) != 0:
                 pictCount += 1
-                cv2.imwrite('D:\\Datasets\\Face\\pict' + str(pictCount) + '.png', frame)
+                # cv2.imwrite('D:\\Datasets\\Face\\pict' + str(pictCount) + '.png', frame)
 
                 #get the coordinates/points of interest
                 mouthPoints = mt.getMouthPoints(gray)
@@ -44,15 +44,15 @@ for filename in glob.glob('D:\\Datasets\\**\\*.mpg'):
                 xmax = x+w
                 pictname = 'pict' + str(pictCount) + '.png'
 
-                with open('mouthData.csv', 'r') as csv_file:
-                    csv_reader = csv.reader(csv_file)
-
-                    with open('mouthData.csv', 'a', newline='') as csvappend_file:
-                        csv_writer = csv.writer(csvappend_file)
-                        csv_writer.writerow([pictname, '180', '144', 'Mouth', x, y, xmax, ymax])
-
-                        #debugging tool
-                        print('saved')
+                # with open('mouthData.csv', 'r') as csv_file:
+                #     csv_reader = csv.reader(csv_file)
+                #
+                #     with open('mouthData.csv', 'a', newline='') as csvappend_file:
+                #         csv_writer = csv.writer(csvappend_file)
+                #         csv_writer.writerow([pictname, '180', '144', 'Mouth', x, y, xmax, ymax])
+                #
+                #         #debugging tool
+                #         print('saved')
         evenPicker += 1
        # print('Saving pictures from: '+filename)
 
