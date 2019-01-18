@@ -1,43 +1,41 @@
 import numpy as np
 import os
+import cv2
 
-def framesForWord(normalizedMouth,
-                  framecount=1,
-                  filepath=''):
+wordId = np.load('C:\\Users\\Jaden\\PycharmProjects\\Thesis\\Lip_Reading_Using_CNN_and_LSTM\\Words_and_Lip_Motion_Matching\\wordIdx.npy')
+
+def setAlignFile(filepath):
 
    filepath = filepath.split('.', 1)[0] + ".align"
-   align = open(filepath, 'r')
+   alignFile = open(filepath, 'r')
+   alignFile = alignFile.readlines()
 
-   data = align.readlines()
+   return alignFile
 
-   for x in data:
-      endframe = x.split()
-      norEndframe = int(endframe[1])/1000
-      word = endframe[2]
+def framesForWord(normalizedMouth,
+                   framecount, alignFile):
 
-      if norEndframe >= framecount and word != "sil":
+   for align in alignFile:
+      align = align.split()
 
-         image_min = normalizedMouth[normalizedMouth > 0].min()
-         image_max = normalizedMouth[normalizedMouth > 0].max()
-         normalizedMouth = (normalizedMouth - image_min) / (float(image_max - image_min))
+      endframe = int(align[1])/1000
+      startFrame = int(align[0])/1000
+      word = align[2].split('/',1)
+      word = word[0]
 
-         print(normalizedMouth)
+      if endframe >= framecount and startFrame <= frameCount:
+         if word != "sil" and word != "sip":
 
-         #SAVING TO THE FILE
+            wordArray = normalizedMouth
+            print(word + ' ' + str(frameCount)+' ')
 
+            return word
+            break
 
       else:
          continue
 
-
-
-
-
-def savedFile(speaker_input_train,
-              speaker_input_test,
-              speaker_output_train,
-              speaker_output_test,
-              filePath):
+def savedFile():
 
    #DESTINATION PATH FOR THE ALIGNED WORD
    destination_path = 'D:/RawDatasets/final_project/dataset/lowquality_wordalignment/'
@@ -71,7 +69,21 @@ def savedFile(speaker_input_train,
    f4 = open(destination_path + 'speaker_output_test' + str(count), "wb")
    np.save(f4, speaker_output_test)
 
-path = 'D:/RawDatasets/final_project/dataset/s1/bbaf2n.mpg'
+path = 'D:/Datasets/s1/bbaf2n.mpg'
+alignFile = setAlignFile(path)
+vid = cv2.VideoCapture(path)
 
-data = framesForWord(filepath=path)
+frameCount=1
 
+while(vid.isOpened()):
+
+   r,frame = vid.read()
+
+   data = framesForWord(frame, frameCount,alignFile)
+
+   frameCount+=1
+
+   cv2.imshow('mamaxzs', frame)
+   cv2.waitKey(1)
+
+vid.release()

@@ -60,6 +60,7 @@ while True:
         cropped = image[y2:h2,x2:w2]
 
         print(len(cropped))
+
         #cv2.rectangle(image, (y2,h2), (x2,w2), (255, 0, 0), thickness=3)
     # Show the image
     cv2.imshow("Output", cropped)

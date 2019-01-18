@@ -30,7 +30,7 @@ sys.path.append("..")
 
 # Name of the directory containing the object detection module we're using
 MODEL_NAME = 'C:/Users/Jaden/PycharmProjects/Thesis/Lip_Reading_Using_CNN_and_LSTM/inference_graph'
-VIDEO_NAME = 'D:/Datasets/s1/bbaf2n.mpg'
+VIDEO_NAME = 'D:/Datasets/s32/bbac1n.mpg'
 
 counter=0
 # Grab path to current working directory

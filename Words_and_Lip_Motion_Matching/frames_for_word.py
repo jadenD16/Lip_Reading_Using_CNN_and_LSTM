@@ -1,42 +1,6 @@
 import numpy
 import os
 
-<<<<<<< HEAD
-def framesForWord(normalizedMouth, framecount, filepath):
-
-    source_wordalignment_path = 'D:/RawDatasets/final_project/dataset/lowquality_mouthnormalization/align'
-    destination_path = 'D:/RawDatasets/final_project/dataset/lowquality_wordalignment/'
-
-    for cnt1 in range(1,33):
-        if cnt1 != 8:
-            videoname_list = next(os.walk(filepath))[2]
-            speaker_input_train = []
-            speaker_output_train = []
-            speaker_input_test = []
-            speaker_output_test = []
-            word_dict = {}
-
-            for video_name in videoname_list:
-                align_filename = video_name.split('.', 1)[0] + ".align"
-                fileptr = open(source_wordalignment_path + '/s' + str(cnt1) + '/align/' + align_filename, "r+")
-                sentence_framesdata = fileptr.read().splitlines()
-
-                for word_framedata in sentence_framesdata:
-                    test_flag = False
-                    word_array = numpy.zeros((40, 1600))
-                    starting_frame = word_framedata.split()[0]
-                    starting_frame = int(starting_frame) / 1000
-                    starting_frame += 1
-                    ending_frame = word_framedata.split()[1]
-                    ending_frame = int(ending_frame) / 1000
-                    word = word_framedata.split()[2]
-                    if word not in word_dict:
-                        test_flag = True
-                        word_dict[word] = 1
-                    elif word_dict[word] < 5:
-                        word_dict[word] += 1
-                        test_flag = True
-=======
 source_video_path = 'D:/Datasets/s'
 source_wordalignment_path = 'D:/Datasets\picts/align'
 destination_path = 'D:/Datasets/picts'
@@ -86,10 +50,8 @@ for cnt1 in range(1,33):
                         starting_frame += 1
 
                     if test_flag == False:
-                        print('nyekkkkkkkkk')
                         speaker_input_train.append(word_array)
                         speaker_output_train.append(word)
->>>>>>> 706ec75848f33bca79dbfe5b0f6b63d8785b0872
                     else:
                         word_dict[word] += 1
                     word_index = 0
