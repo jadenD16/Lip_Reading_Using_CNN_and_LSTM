@@ -1,8 +1,14 @@
 import numpy as np
 import os
 import cv2
+from collections import defaultdict
 
-wordId = np.load('C:\\Users\\Jaden\\PycharmProjects\\Thesis\\Lip_Reading_Using_CNN_and_LSTM\\Words_and_Lip_Motion_Matching\\wordIdx.npy')
+#wordSequenceArray = np.zeros(40,1600)
+
+previousWord = ''
+frameperWord = list()
+wordDict = {}
+wordCount = 0
 
 def setAlignFile(filepath):
 
@@ -12,8 +18,8 @@ def setAlignFile(filepath):
 
    return alignFile
 
-def framesForWord(normalizedMouth,
-                   framecount, alignFile):
+def framesForWord(normalizedMouth, framecount, alignFile):
+   global previousWord, wordCount, frameperWord, wordDict
 
    for align in alignFile:
       align = align.split()
@@ -27,63 +33,40 @@ def framesForWord(normalizedMouth,
          if word != "sil" and word != "sip":
 
             wordArray = normalizedMouth
-            print(word + ' ' + str(frameCount)+' ')
 
-            return word
-            break
+            if previousWord != word:
+                previousWord = word
+                wordCount = 0
+                wordDict[word] = frameperWord
+                frameperWord.clear()
+                frameperWord.append(frame)
 
+            else:
+               wordCount += 1
+               frameperWord.append(frame)
+               break
       else:
          continue
-
-def savedFile():
-
-   #DESTINATION PATH FOR THE ALIGNED WORD
-   destination_path = 'D:/RawDatasets/final_project/dataset/lowquality_wordalignment/'
-
-   speaker_input_train = []
-   speaker_output_train = []
-   speaker_input_test = []
-   speaker_output_test = []
-
-
-   folder = filePath.split('/', 5)[4]
-   count = folder.split('s')
-   count = count[1]
-   print(count)
-
-   #KULANG PA ITO NG CONDITIONS..
-   speaker_input_train = np.asarray(speaker_input_train)
-   speaker_input_test = np.asarray(speaker_input_test)
-
-   if not os.path.exists(destination_path):
-      os.makedirs(destination_path)
-   f1 = open(destination_path + 'speaker_input_train' + str(count) + '.npz', "wb")
-   np.savez_compressed(f1, speaker_input_train)
-
-   f2 = open(destination_path + 'speaker_input_test' + str(count) + '.npz', "wb")
-   np.savez_compressed(f2, speaker_input_test)
-
-   f3 = open(destination_path + 'speaker_output_train' + str(count), "wb")
-   np.save(f3, speaker_output_train)
-
-   f4 = open(destination_path + 'speaker_output_test' + str(count), "wb")
-   np.save(f4, speaker_output_test)
+   print(wordDict.keys)
 
 path = 'D:/Datasets/s1/bbaf2n.mpg'
 alignFile = setAlignFile(path)
 vid = cv2.VideoCapture(path)
-
-frameCount=1
+frameCount=0
 
 while(vid.isOpened()):
 
-   r,frame = vid.read()
+    r,frame = vid.read()
+    print(np.shape(frame))
+    data = framesForWord(frame, frameCount,alignFile)
+    frameCount+=1
 
-   data = framesForWord(frame, frameCount,alignFile)
 
-   frameCount+=1
+    if cv2.CAP_PROP_FRAME_COUNT < frameCount:
+        break
 
-   cv2.imshow('mamaxzs', frame)
-   cv2.waitKey(1)
+    cv2.waitKey(1)
 
+    print(wordDict.keys())
+    print(frameCount)
 vid.release()
