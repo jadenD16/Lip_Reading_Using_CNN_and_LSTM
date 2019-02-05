@@ -1,0 +1,104 @@
+import tensorflow as tf
+import numpy as np
+np.random.seed(1337)
+from keras.callbacks import TensorBoard,ModelCheckpoint
+from keras.models import Sequential
+from keras.layers.core import Dense, Dropout, Activation, Masking
+from keras.layers import TimeDistributed
+from keras.layers.recurrent import LSTM
+from keras.models import model_from_json
+from sklearn.utils import shuffle
+import pickle
+import time
+import gc
+
+#ArrayList
+test_acc = []
+X_test_final = []
+y_test_final = []
+#Filepath's
+input_traindata_path = "D:/datasets/lowquality_wordalignment/speaker_input_train"
+output_traindata_path = "D:/datasets/lowquality_wordalignment/speaker_final_output_train"
+input_testdata_path = "D:/datasets/lowquality_wordalignment/speaker_input_test"
+output_testdata_path = "D:/datasets/lowquality_wordalignment/speaker_final_output_test"
+destinationPath = "C:/Users/javinarfamily/PycharmProject/Thesis/Lip_Reading_Using_CNN_and_LSTM/log_dir/"
+
+NAME = "Lip-Reading-{}".format(int(time.time()))
+filepath = "LipreadTrain-{epoch:02d}-{acc:.2f}.hdf5"
+
+#instantiate Tensorboard
+Tensorboard = TensorBoard(log_dir='logs/{}'.format(NAME))
+
+#divide usage of gpu memory
+# gpu_options  = tf.GPUOptions(per_process_gpu_memory_fraction=0.333)
+# sess = tf.Session(config=tf.ConfigProto(gpu_options = gpu_options))
+
+
+model = Sequential()
+
+print("Adding TimeDistributeDense Layer...")
+model.add(TimeDistributed(Dense(128, input_shape=(40, (40, 40)[0]*(40, 40)[1]))))
+
+print("Adding Masking Layer...")
+model.add(Masking(mask_value=0.0))
+
+print("Adding First LSTM Layer...")
+model.add(LSTM(128, return_sequences=True))
+
+print("Adding Second LSTM Layer...")
+model.add(LSTM(128, return_sequences=False))
+
+print("Adding Final Dense Layer...")
+model.add(Dense(52))
+
+print("Adding Softmax Layer...")
+model.add(Activation('softmax'))
+
+
+model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
+
+
+checkpoint = ModelCheckpoint(destinationPath+filepath, monitor='acc',
+                                     verbose=0, save_best_only=False,
+                                     save_weights_only=False, mode='max', period=50)
+
+
+
+for speaker_id in range(1,33):
+
+    fill= np.load(input_traindata_path + str(speaker_id) + ".npz")
+    X_train = fill['arr_0']
+
+    y_train = np.load(output_traindata_path + str(speaker_id) + ".npy")
+    X_train, y_train = shuffle(X_train, y_train, random_state = 0)
+
+    fill2 = np.load(input_testdata_path + str(speaker_id) + ".npz")
+    X_test = fill2['arr_0']
+    y_test = np.load(output_testdata_path + str(speaker_id) + ".npy")
+
+    model.fit(X_train, y_train, batch_size=100,
+              nb_epoch=5, validation_split=0.4, callbacks=[Tensorboard, checkpoint])
+
+
+    X_test_final = X_test_final + list(X_test)
+    y_test_final = y_test_final + list(y_test)
+    X_train_final = X_train_final + list(y_train)
+
+    del X_train
+    del y_train
+
+    fill.close()
+    gc.collect()
+
+X_test_final = np.array(X_test_final)
+y_test_final = np.array(y_test_final)
+
+score, acc = model.evaluate(X_test_final, y_test_final, batch_size=100)
+
+#model save
+model_json = model.to_json()
+with open("model.json","w") as json_file:
+    json_file.write(model_json)
+model.save_weights('weights.h5')
+del model
+
