@@ -43,20 +43,22 @@ def save_model(model,save_topo_to):
         json_file.write(model_json)
     del model
 
-def create_model(save_topo_to='structure.json', save_result=True):
+
+
+def create_model(max_seqlen=40, image_size=(40, 40), fc_size=128,save_topo_to='structure.json', save_result=True):
         model = Sequential()
 
         print("Adding TimeDistributeDense Layer...")
-        model.add(TimeDistributed(Dense(128, input_shape=(40, (40, 40)[0]*(40, 40)[1]))))
+        model.add(Dense(fc_size, input_shape=(max_seqlen, image_size[0] * image_size[1])))
 
         print("Adding Masking Layer...")
         model.add(Masking(mask_value=0.0))
 
         print("Adding First LSTM Layer...")
-        model.add(LSTM(128, return_sequences=True))
+        model.add(LSTM(fc_size, return_sequences=True))
 
         print("Adding Second LSTM Layer...")
-        model.add(LSTM(128, return_sequences=False))
+        model.add(LSTM(fc_size, return_sequences=False))
 
         print("Adding Final Dense Layer...")
         model.add(Dense(52))
@@ -75,35 +77,30 @@ def create_model(save_topo_to='structure.json', save_result=True):
 
 
 checkpoint = ModelCheckpoint(checkpoint, monitor='loss', verbose=1,
-                             save_weights_only=True,save_best_only=True, mode='max', period=5)
-
+                             save_weights_only=True,save_best_only=True, mode='min', period=20)
 
 model = create_model()
 
 for speaker_id in range(1,33):
-
         model.load_weights("training/checkpoint.ckpt")
-
+        
+        
         fill = np.load(input_traindata_path + str(speaker_id) + ".npz")
         X_train = fill['arr_0']
-
         y_train = np.load(output_traindata_path + str(speaker_id) + ".npy")
         X_train, y_train = shuffle(X_train, y_train, random_state = 0)
-
         fill2 = np.load(input_testdata_path + str(speaker_id) + ".npz")
         X_test = fill2['arr_0']
         y_test = np.load(output_testdata_path + str(speaker_id) + ".npy")
 
         model.fit(X_train, y_train, batch_size=100,
-                          nb_epoch=5, validation_split=0.4, callbacks=[Tensorboard, checkpoint])
+                          nb_epoch=20, validation_split=0.4, callbacks=[Tensorboard, checkpoint])
 
 
         X_test_final = X_test_final + list(X_test)
         y_test_final = y_test_final + list(y_test)
-
         del X_train
         del y_train
-
         fill.close()
         gc.collect()
 
