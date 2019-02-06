@@ -10,6 +10,7 @@ from keras.layers.recurrent import LSTM
 from keras.models import model_from_json
 from sklearn.utils import shuffle
 from keras.optimizers import rmsprop
+import json
 import pickle
 import time
 import gc
@@ -36,7 +37,13 @@ Tensorboard = TensorBoard(log_dir='logs/{}'.format(NAME))
 gpu_options  = tf.GPUOptions(per_process_gpu_memory_fraction=0.222)
 sess = tf.Session(config=tf.ConfigProto(gpu_options = gpu_options))
 
-def create_model():
+def save_model(model,save_topo_to):
+    model_json = model.to_json()
+    with open(save_topo_to, 'w') as json_file:
+        json_file.write(model_json)
+    del model
+
+def create_model(save_topo_to='structure.json', save_result=True):
         model = Sequential()
 
         print("Adding TimeDistributeDense Layer...")
@@ -60,7 +67,12 @@ def create_model():
         rmsprop(lr=0.0002, rho=0.9, epsilon=1e-6)
         model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
 
+        if save_result:
+            print("Saving Model to file...")
+            save_model(model, save_topo_to)
         return model
+
+
 
 checkpoint = ModelCheckpoint(checkpoint, monitor='loss', verbose=1,
                              save_weights_only=True,save_best_only=True, mode='max', period=5)
@@ -69,7 +81,7 @@ checkpoint = ModelCheckpoint(checkpoint, monitor='loss', verbose=1,
 model = create_model()
 
 for speaker_id in range(1,33):
-        model = create_model()
+
         model.load_weights("training/checkpoint.ckpt")
 
         fill = np.load(input_traindata_path + str(speaker_id) + ".npz")
@@ -83,7 +95,7 @@ for speaker_id in range(1,33):
         y_test = np.load(output_testdata_path + str(speaker_id) + ".npy")
 
         model.fit(X_train, y_train, batch_size=100,
-                  nb_epoch=5, validation_split=0.4, callbacks=[Tensorboard, checkpoint])
+                          nb_epoch=5, validation_split=0.4, callbacks=[Tensorboard, checkpoint])
 
 
         X_test_final = X_test_final + list(X_test)
@@ -94,7 +106,6 @@ for speaker_id in range(1,33):
 
         fill.close()
         gc.collect()
-
 
 X_test_final = np.array(X_test_final)
 y_test_final = np.array(y_test_final)
