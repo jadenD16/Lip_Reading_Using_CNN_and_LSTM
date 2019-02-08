@@ -21,10 +21,10 @@ test_acc = []
 X_test_final = []
 y_test_final = []
 #Filepath's
-input_traindata_path = "D:/datasets/lowquality_wordalignment/speaker_input_train"
-output_traindata_path = "D:/datasets/lowquality_wordalignment/speaker_final_output_train"
-input_testdata_path = "D:/datasets/lowquality_wordalignment/speaker_input_test"
-output_testdata_path = "D:/datasets/lowquality_wordalignment/speaker_final_output_test"
+input_traindata_path = "D:/Datasets/output/speaker_input_train"
+output_traindata_path = "D:/Datasets/output/speaker_final_output_train"
+input_testdata_path = "D:/Datasets/output/speaker_input_test"
+output_testdata_path = "D:/Datasets/output/speaker_final_output_test"
 
 checkpoint = "training/checkpoint.ckpt"
 checkpoint_dir = os.path.dirname(checkpoint)
@@ -42,8 +42,6 @@ def save_model(model,save_topo_to):
     with open(save_topo_to, 'w') as json_file:
         json_file.write(model_json)
     del model
-
-
 
 def create_model(max_seqlen=40, image_size=(40, 40), fc_size=128,save_topo_to='structure.json', save_result=True):
         model = Sequential()
@@ -77,14 +75,17 @@ def create_model(max_seqlen=40, image_size=(40, 40), fc_size=128,save_topo_to='s
 
 
 checkpoint = ModelCheckpoint(checkpoint, monitor='loss', verbose=1,
-                             save_weights_only=True,save_best_only=True, mode='min', period=20)
+                             save_weights_only=True,save_best_only=False, mode='min')
+
 
 model = create_model()
 
-for speaker_id in range(1,33):
-        model.load_weights("training/checkpoint.ckpt")
-        
-        
+model.fit_generator
+
+for speaker_id in range(1,4):
+
+        model.load_weights('training/checkpoint.ckpt')
+
         fill = np.load(input_traindata_path + str(speaker_id) + ".npz")
         X_train = fill['arr_0']
         y_train = np.load(output_traindata_path + str(speaker_id) + ".npy")
@@ -93,16 +94,20 @@ for speaker_id in range(1,33):
         X_test = fill2['arr_0']
         y_test = np.load(output_testdata_path + str(speaker_id) + ".npy")
 
-        model.fit(X_train, y_train, batch_size=100,
-                          nb_epoch=20, validation_split=0.4, callbacks=[Tensorboard, checkpoint])
+         model.fit(X_train, y_train, batch_size=100,nb_epoch=2, validation_split=0.4, callbacks=[Tensorboard, checkpoint])
 
+        model.save_weights('log_dir/weights.h5')
 
         X_test_final = X_test_final + list(X_test)
         y_test_final = y_test_final + list(y_test)
+
+        # del model
         del X_train
         del y_train
+
         fill.close()
         gc.collect()
+
 
 X_test_final = np.array(X_test_final)
 y_test_final = np.array(y_test_final)
