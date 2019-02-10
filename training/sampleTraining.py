@@ -20,12 +20,12 @@ test_acc = []
 X_test_final = []
 y_test_final = []
 # Filepath's
-input_traindata_path = "D:/Datasets/output/speaker_input_train"
-output_traindata_path = "D:/Datasets/output/speaker_final_output_train"
-input_testdata_path = "D:/Datasets/output/speaker_input_test"
-output_testdata_path = "D:/Datasets/output/speaker_final_output_test"
+input_traindata_path = "D:/datasets/lowquality_wordalignment/speaker_input_train"
+output_traindata_path = "D:/datasets/lowquality_wordalignment/speaker_final_output_train"
+input_testdata_path = "D:/datasets/lowquality_wordalignment/speaker_input_test"
+output_testdata_path = "D:/datasets/lowquality_wordalignment/speaker_final_output_test"
 
-checkpoint = "training/checkpoint.ckpt"
+checkpoint = "checkpoint.ckpt"
 checkpoint_dir = os.path.dirname(checkpoint)
 
 # instantiate Tensorboard
@@ -33,7 +33,7 @@ NAME = "Lip-Reading-{}".format(int(time.time()))
 Tensorboard = TensorBoard(log_dir='logs/{}'.format(NAME))
 
 # divide usage of gpu memory
-gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.222)
+gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.3)
 sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
 
 
@@ -100,16 +100,21 @@ model = create_model()
 
 traindata = []
 outputTrain = []
-
-for x in range(1,4):
+testdata = []
+outputTest = []
+for x in range(1,33):
     traindata.append(input_traindata_path+str(x)+'.npz')
     outputTrain.append(output_traindata_path+str(x)+'.npy')
 
-model.fit_generator(generate_batches(traindata, outputTrain),
-                    4, epochs=2, callbacks=[Tensorboard,checkpoint])
+    testdata.append(input_testdata_path+str(x)+'.npz')
+    outputTest.append(output_testdata_path+str(x)+'.npy')
 
-X_test_final = np.array(X_test_final)
-y_test_final = np.array(y_test_final)
 
-score, acc = model.evaluate(X_test_final, y_test_final, batch_size=100)
+with tf.device('/cpu:0'):
+    model.fit_generator(generate_batches(traindata, outputTrain),
+                        4, epochs=2, callbacks=[Tensorboard, checkpoint])
+
+# X_test_final = np.array(X_test_final)
+# y_test_final = np.array(y_test_final)
+    score, acc = model.evaluate_generator(generate_batches(testdata, outputTest), 4)
 
