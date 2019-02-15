@@ -14,6 +14,7 @@ import pickle
 import time
 import gc
 import os
+import multiprocessing
 
 # ArrayList
 test_acc = []
@@ -33,8 +34,6 @@ NAME = "Lip-Reading-{}".format(int(time.time()))
 Tensorboard = TensorBoard(log_dir='logs/{}'.format(NAME))
 
 # divide usage of gpu memory
-gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.3)
-sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
 
 
 def save_model(model, save_topo_to):
@@ -64,11 +63,13 @@ def create_model(max_seqlen=40, image_size=(40, 40), fc_size=128, save_topo_to='
     print("Adding Softmax Layer...")
     model.add(Activation('softmax'))
 
+
     rmsprop(lr=0.0002, rho=0.9, epsilon=1e-6)
     model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
 
     if save_result:
         print("Saving Model to file...")
+        print("saved Model")
         save_model(model, save_topo_to)
     return model
 
@@ -93,16 +94,22 @@ def generate_batches(filesX, fileY):
 
         yield X_train, y_train
 
+
 checkpoint = ModelCheckpoint(checkpoint, monitor='loss', verbose=1,
                              save_weights_only=True, save_best_only=False, mode='min')
 
 model = create_model()
+# model = model_from_json('C:/Users/javinarfamily/PycharmProjects/Thesis/Lip_Reading_Using_CNN_and_LSTM/training/structure.json')
+# model.summary()
+model.load_weights('C:/Users/javinarfamily/PycharmProjects/Thesis/Lip_Reading_Using_CNN_and_LSTM/training/checkpoint.ckpt')
+model.get_weights()
+
 
 traindata = []
 outputTrain = []
 testdata = []
 outputTest = []
-for x in range(1,33):
+for x in range(1,10):
     traindata.append(input_traindata_path+str(x)+'.npz')
     outputTrain.append(output_traindata_path+str(x)+'.npy')
 
@@ -112,9 +119,10 @@ for x in range(1,33):
 
 with tf.device('/cpu:0'):
     model.fit_generator(generate_batches(traindata, outputTrain),
-                        4, epochs=2, callbacks=[Tensorboard, checkpoint])
+                        samples_per_epoch=1000, epochs=3, max_queue_size=5, callbacks=[Tensorboard, checkpoint])
 
 # X_test_final = np.array(X_test_final)
 # y_test_final = np.array(y_test_final)
     score, acc = model.evaluate_generator(generate_batches(testdata, outputTest), 4)
+    model.save_weights('complete.h5')
 
