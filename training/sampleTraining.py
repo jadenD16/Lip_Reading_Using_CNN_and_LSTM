@@ -21,10 +21,12 @@ test_acc = []
 X_test_final = []
 y_test_final = []
 # Filepath's
-input_traindata_path = "D:/datasets/lowquality_wordalignment/speaker_input_train"
-output_traindata_path = "D:/datasets/lowquality_wordalignment/speaker_final_output_train"
-input_testdata_path = "D:/datasets/lowquality_wordalignment/speaker_input_test"
-output_testdata_path = "D:/datasets/lowquality_wordalignment/speaker_final_output_test"
+
+input_traindata_path = "D:/Datasets/output/speaker_input_train"
+output_traindata_path = "D:/Datasets/output/speaker_final_output_train"
+input_testdata_path = "D:/Datasets/output/speaker_input_test"
+output_testdata_path = "D:/Datasets/output/speaker_final_output_test"
+
 
 checkpoint = "checkpoint.ckpt"
 checkpoint_dir = os.path.dirname(checkpoint)
@@ -101,7 +103,7 @@ checkpoint = ModelCheckpoint(checkpoint, monitor='loss', verbose=1,
 model = create_model()
 # model = model_from_json('C:/Users/javinarfamily/PycharmProjects/Thesis/Lip_Reading_Using_CNN_and_LSTM/training/structure.json')
 # model.summary()
-model.load_weights('C:/Users/javinarfamily/PycharmProjects/Thesis/Lip_Reading_Using_CNN_and_LSTM/training/checkpoint.ckpt')
+model.load_weights('C:/Users/Jaden/PycharmProjects/Thesis/Lip_Reading_Using_CNN_and_LSTM/training/checkpoint.ckpt')
 model.get_weights()
 
 
