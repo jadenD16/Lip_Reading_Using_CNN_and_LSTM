@@ -1,51 +1,51 @@
-a
-again
-at
-b
-bin
-blue
-by
-c
-d
-e
-eight
-f
-five
-four
-g
-green
-h
-i
-in
-j
-k
-l
-lay
-m
-n
-nine
-now
-o
-one
-p
-place
-please
-q
-r
-red
-s
-set
-seven
-six
-soon
-t
-three
-two
-u
-v
-white
-with
-x
-y
-z
-zero
+1 a
+2 again
+3 at
+4 b
+5 bin
+6 blue
+7 by
+8 c
+9 d
+10 e
+11 eight
+12 f
+13 five
+14 four
+15 g
+16 green
+17 h
+18 i
+19 in
+20 j
+21 k
+22 l
+23 lay
+24 m
+25 n
+26 nine
+27 now
+28 o
+29 one
+30 p
+31 place
+32 please
+33 q
+34 r
+35 red
+36 s
+37 set
+38 seven
+39 six
+40 soon
+41 t
+42 three
+43 two
+44 u
+45 v
+46 white
+47 with
+48 x
+48 y
+50 z
+51 zero
