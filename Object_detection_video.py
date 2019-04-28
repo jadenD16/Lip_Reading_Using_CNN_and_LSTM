@@ -26,19 +26,6 @@ def normalizedMouth(mouth):
 
     return mouth
 
-def read_model(weights_filename='untrained_weight.h5',
-               topo_filename='model.h5',
-                path='C:\\Users\\Jaden\\PycharmProjects\\Thesis\\Lip_Reading_Using_CNN_and_LSTM\\training\\2nd Model checkpoint(ac- 78 and valacc - 63'):
-    print("Reading Model from " + weights_filename + " and " + topo_filename)
-    print("Please wait, it takes time.")
-    with open(topo_filename) as data_file:
-        model = load_model(data_file)
-        model.load_weights(weights_filename)
-        print("Finish Reading!")
-        model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-        return model
-
-
 # This is needed since the notebook is stored in the object_detection folder.
 sys.path.append("..")
 
@@ -104,7 +91,6 @@ num_detections = detection_graph.get_tensor_by_name('num_detections:0')
 video = cv2.VideoCapture(0)
 
 while(video.isOpened()):
-
     # Acquire frame and expand frame dimensions to have shape: [1, None, None, 3]
     # i.e. a single-column array, where each item in the column has the pixel RGB value
     ret, frame = video.read()
@@ -115,29 +101,21 @@ while(video.isOpened()):
         [detection_boxes, detection_scores, detection_classes, num_detections],
         feed_dict={image_tensor: frame_expanded})
 
-    a = vis_util.visualize_boxes_and_labels_on_image_array(
+    # Draw the results of the detection (aka 'visulaize the results')
+    vis_util.visualize_boxes_and_labels_on_image_array(
         frame,
         np.squeeze(boxes),
         np.squeeze(classes).astype(np.int32),
         np.squeeze(scores),
         category_index,
         use_normalized_coordinates=True,
-        line_thickness=3,
+        line_thickness=8,
         min_score_thresh=0.80)
 
-    #box =unnormalize_coordinates(area[0], area[1], area[2], area[3],image)
-
-    #print(np.shape(image))
-
-    #cropped=tryput[int(box[1]):int(box[3]), int(box[0]):int(box[2])]
-
-    #normMouth = normalizedMouth(cropped)
-
-    cv2.imshow("mouth", a)
-    print(boxes)
-    cv2.waitKey(1)
     # All the results have been drawn on the frame, so it's time to display it.
-    counter += 1
+    cv2.imshow('Object detector', frame)
+
+    cv2.waitKey(1)
 
 # Clean up
 video.release()

@@ -52,7 +52,7 @@ def read_model(weights_filename='untrained_weight.h5',
     model = load_model(model)
     #model.load_weights('C:/Users/Jaden/Downloads/GRIDcorpus-experiments-master/TRAINED-MODELS/weightts.hdf5')
     print("Finish Reading!")
-    model.compile(loss='categorical_crossentropy', optimizer='sgd', metrics=['accuracy'])
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     return model
 
 
@@ -144,7 +144,7 @@ while True:
 
 
 
-        if wCounter == 6:
+        if wCounter == 8:
             a = model.predict_classes(wordSequence)
             if previous != a[0]:
                 word = list(wordDict.keys())[list(wordDict.values()).index(a[0])]
